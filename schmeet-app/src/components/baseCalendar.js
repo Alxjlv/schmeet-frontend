@@ -12,13 +12,16 @@ import appointments from "../demo-data/today-appointments";
 
 const BlackOutAppointment = ({ children, style, ...restProps }) => (
 	<Appointments.Appointment
+		onClick={() => console.log("cliekc")}
 		{...restProps}
 		style={{
 			...style,
 			backgroundColor: "gray",
 			borderRadius: "8px",
 		}}
-	></Appointments.Appointment>
+	>
+		{children}
+	</Appointments.Appointment>
 );
 
 const style = (theme) => ({
@@ -55,48 +58,20 @@ const style = (theme) => ({
 });
 
 const TimeTableCellBase = ({ classes, ...restProps }) => {
+	console.log(classes);
+	console.log(restProps);
 	const { startDate } = restProps;
 	const date = new Date(startDate);
-	if (date.getDate() === new Date().getDate()) {
-		return (
-			<WeekView.TimeTableCell
-				{...restProps}
-				className={classes.todayCell}
-			/>
-		);
-	}
-	if (date.getDay() === 0 || date.getDay() === 6) {
-		return (
-			<WeekView.TimeTableCell
-				{...restProps}
-				className={classes.weekendCell}
-			/>
-		);
-	}
-	return <WeekView.TimeTableCell {...restProps} />;
+	return (
+		<WeekView.TimeTableCell
+			{...restProps}
+			onClick={() => console.log(restProps)}
+		/>
+	);
 };
 
 const TimeTableCell = withStyles(style, { name: "TimeTableCell" })(
 	TimeTableCellBase
-);
-
-const DayScaleCellBase = ({ classes, ...restProps }) => {
-	const { startDate, today } = restProps;
-	if (today) {
-		return (
-			<WeekView.DayScaleCell {...restProps} className={classes.today} />
-		);
-	}
-	if (startDate.getDay() === 0 || startDate.getDay() === 6) {
-		return (
-			<WeekView.DayScaleCell {...restProps} className={classes.weekend} />
-		);
-	}
-	return <WeekView.DayScaleCell {...restProps} />;
-};
-
-const DayScaleCell = withStyles(style, { name: "DayScaleCell" })(
-	DayScaleCellBase
 );
 
 export default class BaseCalendar extends React.PureComponent {
@@ -113,13 +88,12 @@ export default class BaseCalendar extends React.PureComponent {
 
 		return (
 			<Paper>
-				<Scheduler data={data} height={660}>
+				<Scheduler data={data} height={"100%"}>
 					<ViewState />
 					<WeekView
 						startDayHour={9}
 						endDayHour={19}
 						timeTableCellComponent={TimeTableCell}
-						dayScaleCellComponent={DayScaleCell}
 					/>
 					<Appointments appointmentComponent={BlackOutAppointment} />
 				</Scheduler>
