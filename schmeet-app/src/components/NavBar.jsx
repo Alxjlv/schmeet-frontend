@@ -7,7 +7,7 @@ import logoDark from "../images/schmeet-dark.png";
 function NavBar() {
 	return (
 		<div className="NavBar">
-			<AppBar className="TopNavbar" color="White">
+			<AppBar className="TopNavbar" position="static" color="white">
 				<Toolbar>
                     <Grid container justify="space-between" >
                         <Grid item xs={6}>
