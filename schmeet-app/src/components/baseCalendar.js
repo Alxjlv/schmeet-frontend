@@ -10,6 +10,17 @@ import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import appointments from "../demo-data/today-appointments";
 
+const BlackOutAppointment = ({ children, style, ...restProps }) => (
+	<Appointments.Appointment
+		{...restProps}
+		style={{
+			...style,
+			backgroundColor: "gray",
+			borderRadius: "8px",
+		}}
+	></Appointments.Appointment>
+);
+
 const style = (theme) => ({
 	todayCell: {
 		backgroundColor: fade(theme.palette.primary.main, 0.1),
@@ -110,7 +121,7 @@ export default class BaseCalendar extends React.PureComponent {
 						timeTableCellComponent={TimeTableCell}
 						dayScaleCellComponent={DayScaleCell}
 					/>
-					<Appointments />
+					<Appointments appointmentComponent={BlackOutAppointment} />
 				</Scheduler>
 			</Paper>
 		);
