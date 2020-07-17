@@ -1,6 +1,6 @@
 .App {
 	text-align: center;
-	background: lightgray;
+	/* background: lightgray; */
 }
 
 .TopNavbar {
@@ -11,4 +11,3 @@
 .NavBarItem {
 	height: 40px;
 }
-
