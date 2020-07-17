@@ -1,14 +1,11 @@
 import React from "react";
-import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "./App.css";
-import DateFnsUtils from "@date-io/date-fns";
+import BaseCalendar from "./components/baseCalendar";
 
 function App() {
 	return (
 		<div className="App">
-			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<DateTimePicker />
-			</MuiPickersUtilsProvider>
+			<BaseCalendar />
 		</div>
 	);
 }
