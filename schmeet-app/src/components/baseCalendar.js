@@ -45,7 +45,7 @@ export default class BaseCalendar extends React.PureComponent {
 				borderRadius: "8px",
 			}}
 		>
-			{children}
+			{console.log(children)}
 		</Appointments.Appointment>
 	);
 
