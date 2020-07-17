@@ -99,7 +99,7 @@ const DayScaleCell = withStyles(style, { name: "DayScaleCell" })(
 	DayScaleCellBase
 );
 
-export default class BaseCalendar extends React.PureComponent {
+export default class BaseCalendar extends React.Component {
 	constructor(props) {
 		super(props);
 
