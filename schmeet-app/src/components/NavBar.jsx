@@ -5,6 +5,7 @@ import logoLight from "../images/schmeet-light.png";
 import logoDark from "../images/schmeet-dark.png";
 import { Link } from "react-router-dom";
 import NotificationBadge from "./NotificationBadge";
+import profImage from "../images/account4.png";
 
 function NavBar() {
 	return (
@@ -22,6 +23,7 @@ function NavBar() {
 						<Grid item xs={6}>
 							<Avatar
 								className="NavBarItem"
+								src={profImage}
 								style={{
 									float: "right",
 									marginLeft: "30px",
