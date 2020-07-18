@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "../App.css";
-import { makeStyles } from "@material-ui/core/styles";
-
 import {
 	Card,
 	Button,
@@ -13,7 +11,6 @@ import {
 	Paper,
 	Divider,
 	Box,
-	Grid,
 } from "@material-ui/core";
 import { appointments } from "../demo-data/appointments";
 
@@ -41,9 +38,14 @@ const MeetingCard = (props) => (
 		</CardActionArea>
 		<CardActions>
 			<Button size="medium" color="primary">
-				Share
+				Invite
 			</Button>
-			<Button size="medium" color="primary" href={props.meeting.link} target="blank">
+			<Button
+				size="medium"
+				color="primary"
+				href={props.meeting.link}
+				target="blank"
+			>
 				Join
 			</Button>
 		</CardActions>
@@ -61,19 +63,6 @@ const formatToHoursAndMinutes = (date) => {
 	return strTime;
 };
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	paper: {
-		height: 140,
-		width: 100,
-	},
-	control: {
-		padding: theme.spacing(2),
-	},
-}));
-
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
@@ -85,7 +74,7 @@ export default class HomePage extends Component {
 
 	cardList(day) {
 		return this.state.meetings
-			.filter((meeting) => meeting.startDate.getDay() - 1 == day)
+			.filter((meeting) => meeting.startDate.getDay() - 1 === day)
 			.map((meeting) => {
 				return (
 					<MeetingCard meeting={meeting} style={{ margin: "20px" }} />
@@ -117,7 +106,7 @@ export default class HomePage extends Component {
 							paddingTop: 15,
 							minHeight: "100%",
 							background:
-								i == 1 &&
+								i === 1 &&
 								"linear-gradient(to right, #36d1dc, #5b86e5)",
 						}}
 					>
@@ -126,7 +115,7 @@ export default class HomePage extends Component {
 							variant="h4"
 							component="h2"
 							style={{
-								color: i == 1 && "white",
+								color: i === 1 && "white",
 							}}
 						>
 							{this.intToDay(i)} {13 + i + "th"}
@@ -144,7 +133,10 @@ export default class HomePage extends Component {
 					mx="auto"
 					bgcolor="background.paper"
 					p={1}
-					style={{ display: "flex", justifyContent: "space-between" }}
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+					}}
 				>
 					<Button
 						variant="contained"

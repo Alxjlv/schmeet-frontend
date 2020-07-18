@@ -1,8 +1,7 @@
 import React from "react";
 import "./App.css";
 import NavBar from "./components/NavBar.jsx";
-import BaseCalendar from "./components/baseCalendar";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import NewMeeting from "./components/NewMeeting";
 import HomePage from "./components/HomePage";
 

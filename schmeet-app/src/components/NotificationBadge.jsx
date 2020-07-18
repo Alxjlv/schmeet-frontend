@@ -1,12 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import WarningIcon from "@material-ui/icons/Warning";
 import { IconButton, Menu, MenuItem, Badge } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 
