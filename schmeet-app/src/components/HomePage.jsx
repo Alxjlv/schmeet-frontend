@@ -12,6 +12,8 @@ import {
 	CardActions,
 	Paper,
 	Divider,
+	Box,
+	Grid,
 } from "@material-ui/core";
 import { appointments } from "../demo-data/appointments";
 
@@ -59,7 +61,20 @@ const formatToHoursAndMinutes = (date) => {
 	return strTime;
 };
 
-export default class ExercisesList extends Component {
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	paper: {
+		height: 140,
+		width: 100,
+	},
+	control: {
+		padding: theme.spacing(2),
+	},
+}));
+
+export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -101,10 +116,20 @@ export default class ExercisesList extends Component {
 							margin: "5px",
 							paddingTop: 15,
 							minHeight: "100%",
+							background:
+								i == 1 &&
+								"linear-gradient(to right, #36d1dc, #5b86e5)",
 						}}
 					>
-						<Typography gutterBottom variant="h4" component="h2">
-							{this.intToDay(i)}
+						<Typography
+							gutterBottom
+							variant="h4"
+							component="h2"
+							style={{
+								color: i == 1 && "white",
+							}}
+						>
+							{this.intToDay(i)} {13 + i + "th"}
 						</Typography>
 						<Divider />
 						{this.cardList(i)}
@@ -115,6 +140,38 @@ export default class ExercisesList extends Component {
 
 		return (
 			<div>
+				<Box
+					mx="auto"
+					bgcolor="background.paper"
+					p={1}
+					style={{ display: "flex", justifyContent: "space-between" }}
+				>
+					<Button
+						variant="contained"
+						color="primary"
+						style={{
+							float: "right",
+							marginRight: "20px",
+							height: 50,
+						}}
+					>
+						Next Week
+					</Button>
+					<Typography gutterBottom variant="h2" component="h2">
+						Schedule for 13th - 18th of July
+					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						style={{
+							float: "right",
+							marginRight: "20px",
+							height: 50,
+						}}
+					>
+						Previous Week
+					</Button>
+				</Box>
 				<CssBaseline />
 				<div style={{ display: "flex" }}>{columns}</div>
 			</div>

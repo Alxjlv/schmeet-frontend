@@ -70,4 +70,14 @@ export const appointments = [
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
 	},
+	{
+		title: "Another Meeting with Leon",
+		startDate: new Date(2020, 7, 20, 14, 0),
+		endDate: new Date(2020, 7, 20, 15, 0),
+		id: 0,
+		location: "Room 1",
+		description: "Probably the best time you'll ever have in your life",
+		link:
+			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+	},
 ];
