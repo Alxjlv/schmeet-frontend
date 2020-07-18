@@ -100,7 +100,6 @@ const BaseCalendar = () => {
 		<React.Fragment>
 			<Paper style={{ margin: "100px" }}>
 				<Scheduler data={data} height={700}>
-					{console.log(data)}
 					<ViewState currentDate={currentDate} />
 					<EditingState
 						onCommitChanges={onCommitChanges}
