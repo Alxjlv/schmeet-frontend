@@ -12,6 +12,9 @@ function App() {
 	const palletType = darkState ? "dark" : "light";
 	const darkTheme = createMuiTheme({
 		palette: {
+			primary: {
+				main: "#2196f3",
+			},
 			type: palletType,
 		},
 	});
