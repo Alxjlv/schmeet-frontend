@@ -8,15 +8,12 @@ class CalendarPicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
-            freeEvents: this.findFreeEvents()
+            selected: null
         };
-        console.log(typeof this.props.duration);
     }
 
     findFreeEvents() {
-        const duration = this.props.duration;
-        // const duration = 60;
+        const duration = parseInt(this.props.duration);
 
         var start;
         var temp;
@@ -27,11 +24,6 @@ class CalendarPicker extends React.Component {
             start = freeSlot.startDate;
             end = freeSlot.endDate;
             temp = this.addDurationToDate(start, duration);
-
-            console.log(start);
-            console.log(end);
-            console.log(temp);
-            console.log(temp <= end);
 
             while (temp <= end) {
                 freeEvent = {
@@ -44,12 +36,11 @@ class CalendarPicker extends React.Component {
                 temp = this.addDurationToDate(start, duration);
             }
         }
-
-        console.log(freeEvents);
         return freeEvents;
     }
 
     addDurationToDate(start, durationMinutes) {
+        console.log(start);
         const year = start.getFullYear();
         const month = start.getMonth();
         const date = start.getDate();
@@ -139,7 +130,7 @@ class CalendarPicker extends React.Component {
                 <div className="item time"><Typography variant="button">3 PM</Typography></div>
                 <div className="item time"><Typography variant="button">4 PM</Typography></div>
                 <div className="item time"><Typography variant="button">5 PM</Typography></div>
-                {this.state.freeEvents.map((event) => {
+                {this.findFreeEvents().map((event) => {
                     var className;
                     if (this.props.duration == 60) {
                         className = "item event event-60";

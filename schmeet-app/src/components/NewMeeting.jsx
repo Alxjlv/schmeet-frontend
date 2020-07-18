@@ -48,6 +48,7 @@ class NewMeeting extends React.Component {
 		this.setState({
 			invitees: invitees
 		})
+		console.log(this.state.invitees);
 		this.hideCalendar();
 	}
 
@@ -67,7 +68,6 @@ class NewMeeting extends React.Component {
 		this.setState({
 			duration: event.target.value
 		});
-		this.hideCalendar();
 	}
 
 	handleEventSelection = (event) => {
@@ -121,8 +121,7 @@ class NewMeeting extends React.Component {
 						}}
 						onChange={this.handleDurationChange}
 						>
-							<option aria-label="None" value="" />
-							<option value={30}>30 minutes</option>
+							<option value={30}>30 minutes (default)</option>
 							<option value={60}>60 minutes</option>
 							<option value={90}>90 minutes</option>
 							<option value={120}>120 minutes</option>
