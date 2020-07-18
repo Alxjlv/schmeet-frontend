@@ -33,19 +33,25 @@ class InviteField extends React.Component {
 
   render() {
     return (
-      <React.Fragment style={{ alignContent: "bottom" }}>
+      <div className="InviteFieldContainer">
         {this.state.emails.map((email) => (
-          <Chip key={email} label={email} deleteIcon={<ClearIcon />}></Chip>
+          <Chip
+            className="InviteFieldItem"
+            key={email}
+            label={email}
+            deleteIcon={<ClearIcon />}
+          ></Chip>
         ))}
 
         <TextField
+          className="InviteFieldItem TextInput"
           label="Invitees"
           value={this.state.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
           autofocus={true}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }

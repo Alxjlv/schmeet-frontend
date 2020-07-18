@@ -10,3 +10,7 @@
 .NavBarItem {
 	height: 40px;
 }
+
+.TextInput {
+	width: 500px;
+}

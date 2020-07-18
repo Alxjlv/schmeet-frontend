@@ -38,7 +38,7 @@ function NewMeeting() {
 				New Meeting
 			</Typography>
 
-			<Grid container spacing={3} className={classes.root}>
+			<Grid container spacing={3} className="TextInput">
 				<Grid item xs={12}>
 					<InviteField/>
 				</Grid>
@@ -46,7 +46,7 @@ function NewMeeting() {
 					<TextField
 						id="title"
 						label="Title"
-						className={classes.textField}
+						className="TextInput"
 						autoFocus="true"
 					/>
 				</Grid>
@@ -54,14 +54,14 @@ function NewMeeting() {
 					<TextField
 						id="description"
 						label="Description"
-						className={classes.textField}
+						className="TextInput"
 					/>
 				</Grid>
 				<Grid item xs={12}>
 					<TextField
 						id="length"
 						label="Length (in minutes)"
-						className={classes.textField}
+						className="TextInput"
 					/>
 				</Grid>
 				<Grid item xs={12}>
