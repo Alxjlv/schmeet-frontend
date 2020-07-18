@@ -97,7 +97,16 @@ class NewMeeting extends React.Component {
 					</Grid>
 					<Grid item xs={12}>
 						{isShowCalendar ? (
-							<BaseCalendar onAddMeeting={this.addMeeting} />
+							<>
+								<BaseCalendar onAddMeeting={this.addMeeting} />
+								<Button
+									variant="contained"
+									color="primary"
+									size="large"
+								>
+									Create Meeting
+								</Button>
+							</>
 						) : (
 							<Button
 								variant="contained"
