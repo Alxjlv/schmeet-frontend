@@ -14,13 +14,8 @@ import { Link } from "react-router-dom";
 import NotificationBadge from "./NotificationBadge";
 import profImage from "../images/account4.png";
 import {
-	AccountCircleOutlined as AccountsIcon,
-	DashboardOutlined as TileViewIcon,
 	Brightness4Outlined as ToggleDarkModeIcon,
 	Brightness5Outlined as ToggleLightModeIcon,
-	SearchOutlined as SearchIcon,
-	Menu as MenuIcon,
-	ViewAgendaOutlined as ListIcon,
 } from "@material-ui/icons";
 
 function NavBar({ theme, toggleDarkMode }) {
