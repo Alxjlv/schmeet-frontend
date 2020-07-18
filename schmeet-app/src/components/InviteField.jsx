@@ -41,7 +41,17 @@ class InviteField extends React.Component {
     }
   };
 
-  handleDelete = (evt) => {};
+  handleDelete = (email) => {
+    var newEmails = [];
+    for (var e of this.state.emails) {
+      if (e != email) {
+        newEmails.push(e);
+      }
+    }
+    this.setState({
+      emails: newEmails
+    });
+  };
 
   render() {
     const len = this.state.emails.length;
@@ -69,7 +79,7 @@ class InviteField extends React.Component {
             className="Chip"
             key={email}
             label={email}
-            onDelete={this.handleDelete}
+            onDelete={() => {this.handleDelete(email)}}
             color="primary"
             tabIndex={-1}
           ></Chip>

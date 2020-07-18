@@ -8,12 +8,13 @@ class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isShowCalendar: false,
-			isEventSelected: false,
+			invitees: null,
 			title: "",
 			description: "",
 			duration: 30,
-			event: null
+			event: null,
+			isShowCalendar: false,
+			isEventSelected: false
 		};
 		this.addMeeting = this.addMeeting.bind(this);
 	}
@@ -47,7 +48,7 @@ class NewMeeting extends React.Component {
 	handleNewInvitee = (invitees) => {
 		this.setState({
 			invitees: invitees
-		})
+		});
 		console.log(this.state.invitees);
 		this.hideCalendar();
 	}
@@ -153,7 +154,7 @@ class NewMeeting extends React.Component {
 								)}
 							</>
 						) : (
-							this.state.duration === null ? (
+							this.state.duration === null || this.state.invitees === null ? (
 							<Button
 								variant="contained"
 								color="primary"
