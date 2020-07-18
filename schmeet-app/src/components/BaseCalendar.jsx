@@ -24,7 +24,7 @@ const BaseCalendar = (props) => {
 		setIsAppointmentBeingCreated,
 	] = React.useState(false);
 
-	const onCommitChanges = (added, changed, deleted) => {
+	const onCommitChanges = ({ added, changed, deleted }) => {
 		props.onAddMeeting(added);
 	};
 

@@ -3,7 +3,6 @@ export const appointments = [
 		title: "Website Re-Design Plan",
 		startDate: new Date("2020-07-13T09:30"),
 		endDate: new Date("2020-07-13T11:30"),
-		location: "Room 1",
 		description:
 			"Plan how to re-design the website with Tait, Seif, and Aiden",
 		link:
@@ -49,7 +48,6 @@ export const appointments = [
 		title: "Break Time",
 		startDate: new Date("2020-07-16T12:00"),
 		endDate: new Date("2020-07-16T13:00"),
-		location: "Room 1",
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
@@ -58,7 +56,6 @@ export const appointments = [
 		title: "Break Time",
 		startDate: new Date("2020-07-17T12:00"),
 		endDate: new Date("2020-07-17T13:00"),
-		location: "Room 1",
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
@@ -67,7 +64,6 @@ export const appointments = [
 		title: "Another Meeting with Leon",
 		startDate: new Date("2020-07-16T14:00"),
 		endDate: new Date("2020-07-16T15:00"),
-		location: "Room 1",
 		description: "Probably the best time you'll ever have in your life",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",

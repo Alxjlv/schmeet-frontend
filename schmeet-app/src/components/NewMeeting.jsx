@@ -14,7 +14,8 @@ import InviteField from "./InviteField";
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isShowCalendar: false };
+		this.state = { isShowCalendar: false, title: "", description: "" };
+		this.addMeeting = this.addMeeting.bind(this);
 	}
 
 	showCalendar() {
@@ -25,8 +26,15 @@ class NewMeeting extends React.Component {
 
 	addMeeting(data) {
 		console.log("hello");
-		console.log(data);
-		const newMeeting = {};
+		const newMeeting = {
+			...data,
+			title: this.state.title,
+			description: this.state.description,
+			link: "REPLACE THIS WITH ZOOM LINK",
+		};
+		console.log(newMeeting);
+		// Now save the new meeting
+		// TODO: Tait save meeting into JSON file
 		window.location = "/";
 	}
 
@@ -55,6 +63,9 @@ class NewMeeting extends React.Component {
 							id="title"
 							label="Title"
 							className="TextInput"
+							inputRef={(c) => {
+								this.state.title = c?.value || "";
+							}}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -62,6 +73,9 @@ class NewMeeting extends React.Component {
 							id="description"
 							label="Description"
 							className="TextInput"
+							inputRef={(c) => {
+								this.state.description = c?.value || "";
+							}}
 						/>
 					</Grid>
 					<Grid item xs={12}>
