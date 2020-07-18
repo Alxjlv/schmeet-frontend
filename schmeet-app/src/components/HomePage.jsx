@@ -1,67 +1,15 @@
 import React, { Component } from "react";
 import "../App.css";
 import {
-	Card,
 	Button,
 	CssBaseline,
-	CardActionArea,
 	Typography,
-	CardContent,
-	CardActions,
 	Paper,
 	Divider,
-	Box,
+	Box
 } from "@material-ui/core";
+import MeetingCard from './MeetingCard';
 import { appointments } from "../demo-data/appointments";
-
-const MeetingCard = (props) => (
-	<Card style={{ maxWidth: 345, margin: 10 }}>
-		<CardActionArea>
-			<CardContent>
-				<Typography gutterBottom variant="h6" component="h4">
-					{props.meeting.title}
-				</Typography>
-				<Typography
-					variant="body2"
-					color="textSecondary"
-					component="p"
-					align="left"
-					gutterBottom
-				>
-					{props.meeting.description}
-				</Typography>
-				<Typography variant="subtitle2" align="left">
-					{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
-					{formatToHoursAndMinutes(props.meeting.endDate)}
-				</Typography>
-			</CardContent>
-		</CardActionArea>
-		<CardActions>
-			<Button size="medium" color="primary">
-				Invite
-			</Button>
-			<Button
-				size="medium"
-				color="primary"
-				href={props.meeting.link}
-				target="blank"
-			>
-				Join
-			</Button>
-		</CardActions>
-	</Card>
-);
-
-const formatToHoursAndMinutes = (date) => {
-	var hours = date.getHours();
-	var minutes = date.getMinutes();
-	var ampm = hours >= 12 ? "pm" : "am";
-	hours = hours % 12;
-	hours = hours ? hours : 12; // the hour '0' should be '12'
-	minutes = minutes < 10 ? "0" + minutes : minutes;
-	var strTime = hours + ":" + minutes + ampm;
-	return strTime;
-};
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -77,7 +25,7 @@ export default class HomePage extends Component {
 			.filter((meeting) => meeting.startDate.getDay() - 1 === day)
 			.map((meeting) => {
 				return (
-					<MeetingCard meeting={meeting} style={{ margin: "20px" }} />
+					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
 				);
 			});
 	}
