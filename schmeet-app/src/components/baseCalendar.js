@@ -1,129 +1,152 @@
-import * as React from "react";
-import Paper from "@material-ui/core/Paper";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import * as React from 'react';
+import Paper from '@material-ui/core/Paper';
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Typography from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
-	Scheduler,
-	WeekView,
-	Appointments,
-} from "@devexpress/dx-react-scheduler-material-ui";
-import { withStyles } from "@material-ui/core/styles";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-import appointments from "../demo-data/today-appointments";
+  Scheduler,
+  WeekView,
+  Appointments,
+  AppointmentForm,
+  AppointmentTooltip,
+  DragDropProvider,
+} from '@devexpress/dx-react-scheduler-material-ui';
 
-const BlackOutAppointment = ({ children, style, ...restProps }) => (
+import { appointments } from '../demo-data/appointments';
+
+const currentDate = '2018-06-27';
+const editingOptionsList = [
+  { id: 'allowAdding', text: 'Adding' },
+  { id: 'allowDeleting', text: 'Deleting' },
+  { id: 'allowUpdating', text: 'Updating' },
+  { id: 'allowResizing', text: 'Resizing' },
+  { id: 'allowDragging', text: 'Dragging' },
+];
+
+export default () => {
+  const [data, setData] = React.useState(appointments);
+  const [editingOptions, setEditingOptions] = React.useState({
+    allowAdding: true,
+    allowDeleting: true,
+    allowUpdating: true,
+    allowDragging: true,
+    allowResizing: true,
+  });
+  const [addedAppointment, setAddedAppointment] = React.useState({});
+  const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] = React.useState(false);
+
+  const {
+    allowAdding, allowDeleting, allowUpdating, allowResizing, allowDragging,
+  } = editingOptions;
+
+  const onCommitChanges = React.useCallback(({ added, changed, deleted }) => {
+    if (added) {
+      const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+      setData([...data, { id: startingAddedId, ...added }]);
+    }
+    if (changed) {
+      setData(data.map(appointment => (
+        changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment)));
+    }
+    if (deleted !== undefined) {
+      setData(data.filter(appointment => appointment.id !== deleted));
+    }
+    setIsAppointmentBeingCreated(false);
+  }, [setData, setIsAppointmentBeingCreated, data]);
+  const onAddedAppointmentChange = React.useCallback((appointment) => {
+    setAddedAppointment(appointment);
+    setIsAppointmentBeingCreated(true);
+  });
+  const handleEditingOptionsChange = React.useCallback(({ target }) => {
+    const { value } = target;
+    const { [value]: checked } = editingOptions;
+    setEditingOptions({
+      ...editingOptions,
+      [value]: !checked,
+    });
+  });
+
+  const TimeTableCell = React.useCallback(React.memo(({ onDoubleClick, ...restProps }) => (
+    <WeekView.TimeTableCell
+      {...restProps}
+      onDoubleClick={allowAdding ? onDoubleClick : undefined}
+    />
+  )), [allowAdding]);
+
+  const CommandButton = React.useCallback(({ id, ...restProps }) => {
+    if (id === 'deleteButton') {
+      return <AppointmentForm.CommandButton id={id} {...restProps} disabled={!allowDeleting} />;
+    }
+    return <AppointmentForm.CommandButton id={id} {...restProps} />;
+  }, [allowDeleting]);
+
+  const allowDrag = React.useCallback(
+    () => allowDragging && allowUpdating,
+    [allowDragging, allowUpdating],
+  );
+  const allowResize = React.useCallback(
+    () => allowResizing && allowUpdating,
+    [allowResizing, allowUpdating],
+  );
+
+  const blackOutAppointment = ({ children, style, ...restProps }) => (
 	<Appointments.Appointment
+		onClick={(xd) => console.log(xd)}
 		{...restProps}
 		style={{
 			...style,
 			backgroundColor: "gray",
 			borderRadius: "8px",
 		}}
-	></Appointments.Appointment>
+	>
+		{console.log(children)}
+	</Appointments.Appointment>
 );
 
-const style = (theme) => ({
-	todayCell: {
-		backgroundColor: fade(theme.palette.primary.main, 0.1),
-		"&:hover": {
-			backgroundColor: fade(theme.palette.primary.main, 0.14),
-		},
-		"&:focus": {
-			backgroundColor: fade(theme.palette.primary.main, 0.16),
-		},
-	},
-	weekendCell: {
-		backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
-		"&:hover": {
-			backgroundColor: fade(
-				theme.palette.action.disabledBackground,
-				0.04
-			),
-		},
-		"&:focus": {
-			backgroundColor: fade(
-				theme.palette.action.disabledBackground,
-				0.04
-			),
-		},
-	},
-	today: {
-		backgroundColor: fade(theme.palette.primary.main, 0.16),
-	},
-	weekend: {
-		backgroundColor: fade(theme.palette.action.disabledBackground, 0.06),
-	},
-});
+  return (
+    <React.Fragment>
+      <Paper>
+        <Scheduler
+          data={data}
+          height={600}
+        >
+          <ViewState
+            currentDate={currentDate}
+          />
+          <EditingState
+            onCommitChanges={onCommitChanges}
 
-const TimeTableCellBase = ({ classes, ...restProps }) => {
-	const { startDate } = restProps;
-	const date = new Date(startDate);
-	if (date.getDate() === new Date().getDate()) {
-		return (
-			<WeekView.TimeTableCell
-				{...restProps}
-				className={classes.todayCell}
-			/>
-		);
-	}
-	if (date.getDay() === 0 || date.getDay() === 6) {
-		return (
-			<WeekView.TimeTableCell
-				{...restProps}
-				className={classes.weekendCell}
-			/>
-		);
-	}
-	return <WeekView.TimeTableCell {...restProps} />;
+            addedAppointment={addedAppointment}
+            onAddedAppointmentChange={onAddedAppointmentChange}
+          />
+          <IntegratedEditing />
+          <WeekView
+            startDayHour={9}
+            endDayHour={19}
+            timeTableCellComponent={TimeTableCell}
+          />
+
+		  <Appointments 
+		  	appointmentComponent={blackOutAppointment}
+		  />
+
+          <AppointmentTooltip
+            showOpenButton
+            showDeleteButton={allowDeleting}
+          />
+          <AppointmentForm
+            commandButtonComponent={CommandButton}
+            readOnly={isAppointmentBeingCreated ? false : !allowUpdating}
+          />
+          <DragDropProvider
+            allowDrag={allowDrag}
+            allowResize={allowResize}
+          />
+        </Scheduler>
+      </Paper>
+    </React.Fragment>
+  );
 };
-
-const TimeTableCell = withStyles(style, { name: "TimeTableCell" })(
-	TimeTableCellBase
-);
-
-const DayScaleCellBase = ({ classes, ...restProps }) => {
-	const { startDate, today } = restProps;
-	if (today) {
-		return (
-			<WeekView.DayScaleCell {...restProps} className={classes.today} />
-		);
-	}
-	if (startDate.getDay() === 0 || startDate.getDay() === 6) {
-		return (
-			<WeekView.DayScaleCell {...restProps} className={classes.weekend} />
-		);
-	}
-	return <WeekView.DayScaleCell {...restProps} />;
-};
-
-const DayScaleCell = withStyles(style, { name: "DayScaleCell" })(
-	DayScaleCellBase
-);
-
-export default class BaseCalendar extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			data: appointments,
-		};
-	}
-
-	render() {
-		const { data } = this.state;
-
-		return (
-			<Paper>
-				<Scheduler data={data} height={660}>
-					<ViewState />
-					<WeekView
-						startDayHour={9}
-						endDayHour={19}
-						timeTableCellComponent={TimeTableCell}
-						dayScaleCellComponent={DayScaleCell}
-					/>
-					<Appointments appointmentComponent={BlackOutAppointment} />
-				</Scheduler>
-			</Paper>
-		);
-	}
-}
