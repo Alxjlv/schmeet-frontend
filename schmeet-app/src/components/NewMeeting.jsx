@@ -20,7 +20,13 @@ class NewMeeting extends React.Component {
 
 	showCalendar() {
 		this.setState({
-			isShowCalendar: true,
+			isShowCalendar: true
+		});
+	}
+
+	hideCalendar() {
+		this.setState({
+			isShowCalendar: false
 		});
 	}
 
@@ -36,6 +42,10 @@ class NewMeeting extends React.Component {
 		// Now save the new meeting
 		// TODO: Tait save meeting into JSON file
 		window.location = "/";
+	}
+
+	handleNewInvitee = () => {
+		this.hideCalendar();
 	}
 
 	render() {
@@ -55,7 +65,7 @@ class NewMeeting extends React.Component {
 					New Meeting
 				</Typography>
 
-				<InviteField />
+				<InviteField onNewInvitee={this.handleNewInvitee}/>
 
 				<Grid container spacing={3} className="TextInput">
 					<Grid item xs={12}>

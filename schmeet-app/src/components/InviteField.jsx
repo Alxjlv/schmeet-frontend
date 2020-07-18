@@ -26,6 +26,7 @@ class InviteField extends React.Component {
           emails: [...this.state.emails, email],
           value: "",
         });
+        this.props.onNewInvitee();
       }
     }
   };
