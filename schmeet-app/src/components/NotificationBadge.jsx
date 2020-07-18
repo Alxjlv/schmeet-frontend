@@ -52,15 +52,12 @@ export default function NotificationBadge() {
 
 	return (
 		<div>
-			<IconButton>
+			<IconButton onClick={handleClick}>
 				<Badge
 					badgeContent={4}
 					color="primary"
 					aria-controls="customized-menu"
 					aria-haspopup="true"
-					variant="contained"
-					// color="primary"
-					onClick={handleClick}
 				>
 					<NotificationsIcon />
 				</Badge>

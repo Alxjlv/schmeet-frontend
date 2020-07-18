@@ -15,7 +15,7 @@ import {
 
 import { appointments } from "../demo-data/appointments";
 
-const currentDate = "2018-06-27";
+const currentDate = "2020-07-23";
 const BaseCalendar = () => {
 	const [data, setData] = React.useState(appointments);
 	const [addedAppointment, setAddedAppointment] = React.useState({});
@@ -100,6 +100,7 @@ const BaseCalendar = () => {
 		<React.Fragment>
 			<Paper style={{ margin: "100px" }}>
 				<Scheduler data={data} height={700}>
+					{console.log(data)}
 					<ViewState currentDate={currentDate} />
 					<EditingState
 						onCommitChanges={onCommitChanges}
