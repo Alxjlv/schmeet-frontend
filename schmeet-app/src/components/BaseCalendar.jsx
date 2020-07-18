@@ -16,7 +16,7 @@ import {
 import { appointments } from "../demo-data/appointments";
 
 const currentDate = "2020-07-13";
-const BaseCalendar = () => {
+const BaseCalendar = (props) => {
 	const [data, setData] = React.useState(appointments);
 	const [addedAppointment, setAddedAppointment] = React.useState({});
 	const [
@@ -50,7 +50,7 @@ const BaseCalendar = () => {
 		[setData, setIsAppointmentBeingCreated, data]
 	);
 	const onAddedAppointmentChange = React.useCallback((appointment) => {
-		appointment.title = "from field";
+		appointment.title = props.meetingTitle;
 		setAddedAppointment(appointment);
 		setIsAppointmentBeingCreated(true);
 	});

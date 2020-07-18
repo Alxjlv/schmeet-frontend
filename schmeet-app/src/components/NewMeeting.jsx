@@ -11,11 +11,21 @@ class NewMeeting extends React.Component {
 		this.state = {isShowCalendar: false};
 	}
 
+	state = {
+		meetingTitle: ""
+	}
+
 	showCalendar() {
 		this.setState({
 			isShowCalendar: true
 		})
 	};
+
+	handleTitleChange = (evt) => {
+		this.setState({
+		  meetingTitle: evt.target.value
+		});
+	  };
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
@@ -42,6 +52,8 @@ class NewMeeting extends React.Component {
 							id="title"
 							label="Title"
 							className="TextInput"
+							value={this.state.meetingTitle}
+							onChange={this.handleTitleChange}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -60,7 +72,7 @@ class NewMeeting extends React.Component {
 					</Grid>
 					<Grid item xs={12}>
 						{isShowCalendar
-							? <BaseCalendar />
+							? <BaseCalendar meetingTitle={this.state.meetingTitle}/>
 							: <Button variant="contained" color="primary" size="large" onClick={() => {this.showCalendar()}}>Find Times</Button>
 						}
 					</Grid>
