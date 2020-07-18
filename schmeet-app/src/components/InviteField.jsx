@@ -59,6 +59,7 @@ class InviteField extends React.Component {
         <IconButton
           onClick={this.handlePlusButton}
           style={{ marginLeft: "-40px", marginBottom: "-32px" }}
+          tabIndex={-1}
         >
           <AddCircle color="primary" />
         </IconButton>
@@ -70,6 +71,7 @@ class InviteField extends React.Component {
             label={email}
             onDelete={this.handleDelete}
             color="primary"
+            tabIndex={-1}
           ></Chip>
         ))}
       </div>
