@@ -1,10 +1,5 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Typography from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
 import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
   Scheduler,
@@ -18,29 +13,10 @@ import {
 import { appointments } from '../demo-data/appointments';
 
 const currentDate = '2018-06-27';
-const editingOptionsList = [
-  { id: 'allowAdding', text: 'Adding' },
-  { id: 'allowDeleting', text: 'Deleting' },
-  { id: 'allowUpdating', text: 'Updating' },
-  { id: 'allowResizing', text: 'Resizing' },
-  { id: 'allowDragging', text: 'Dragging' },
-];
-
 export default () => {
   const [data, setData] = React.useState(appointments);
-  const [editingOptions, setEditingOptions] = React.useState({
-    allowAdding: true,
-    allowDeleting: true,
-    allowUpdating: true,
-    allowDragging: true,
-    allowResizing: true,
-  });
   const [addedAppointment, setAddedAppointment] = React.useState({});
   const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] = React.useState(false);
-
-  const {
-    allowAdding, allowDeleting, allowUpdating, allowResizing, allowDragging,
-  } = editingOptions;
 
   const onCommitChanges = React.useCallback(({ added, changed, deleted }) => {
     if (added) {
@@ -60,36 +36,26 @@ export default () => {
     setAddedAppointment(appointment);
     setIsAppointmentBeingCreated(true);
   });
-  const handleEditingOptionsChange = React.useCallback(({ target }) => {
-    const { value } = target;
-    const { [value]: checked } = editingOptions;
-    setEditingOptions({
-      ...editingOptions,
-      [value]: !checked,
-    });
-  });
 
   const TimeTableCell = React.useCallback(React.memo(({ onDoubleClick, ...restProps }) => (
     <WeekView.TimeTableCell
       {...restProps}
-      onDoubleClick={allowAdding ? onDoubleClick : undefined}
+      onDoubleClick={onDoubleClick}
     />
-  )), [allowAdding]);
+  )));
 
   const CommandButton = React.useCallback(({ id, ...restProps }) => {
     if (id === 'deleteButton') {
-      return <AppointmentForm.CommandButton id={id} {...restProps} disabled={!allowDeleting} />;
+      return <AppointmentForm.CommandButton id={id} {...restProps} disabled={true} />;
     }
     return <AppointmentForm.CommandButton id={id} {...restProps} />;
-  }, [allowDeleting]);
+  }, [false]);
 
   const allowDrag = React.useCallback(
-    () => allowDragging && allowUpdating,
-    [allowDragging, allowUpdating],
+    () => false
   );
   const allowResize = React.useCallback(
-    () => allowResizing && allowUpdating,
-    [allowResizing, allowUpdating],
+    () => false
   );
 
   const blackOutAppointment = ({ children, style, ...restProps }) => (
@@ -108,10 +74,10 @@ export default () => {
 
   return (
     <React.Fragment>
-      <Paper>
+      <Paper style={{margin: "100px"}}>
         <Scheduler
           data={data}
-          height={600}
+          height={500}
         >
           <ViewState
             currentDate={currentDate}
@@ -127,19 +93,15 @@ export default () => {
             startDayHour={9}
             endDayHour={19}
             timeTableCellComponent={TimeTableCell}
+            excludedDays={[0, 6]}
           />
 
 		  <Appointments 
 		  	appointmentComponent={blackOutAppointment}
 		  />
-
-          <AppointmentTooltip
-            showOpenButton
-            showDeleteButton={allowDeleting}
-          />
           <AppointmentForm
             commandButtonComponent={CommandButton}
-            readOnly={isAppointmentBeingCreated ? false : !allowUpdating}
+            readOnly={true}
           />
           <DragDropProvider
             allowDrag={allowDrag}

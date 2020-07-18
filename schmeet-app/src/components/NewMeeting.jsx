@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { sizing } from "@material-ui/system";
+import BaseCalendar from "./baseCalendar.js"
 
 const useStyles = makeStyles({
 	root: {
@@ -58,6 +59,9 @@ function NewMeeting() {
 						label="Length (in minutes)"
 						className={classes.textField}
 					/>
+				</Grid>
+				<Grid item xs={12}>
+					<BaseCalendar/>
 				</Grid>
 			</Grid>
 		</div>
