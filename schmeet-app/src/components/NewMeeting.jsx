@@ -1,19 +1,21 @@
 import React from "react";
 import "../App.css";
-import { Grid, CssBaseline, FormControl, FormHelperText, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
-import BaseCalendar from "./BaseCalendar";
+import { Grid, CssBaseline, FormControl, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
 import InviteField from "./InviteField";
-// import { ReactComponent } from "*.svg";
+import CalendarPicker from "./CalendarPicker";
 
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isShowCalendar: false, title: "", description: "" };
+		this.state = {
+			isShowCalendar: false,
+			isEventSelected: false,
+			title: "",
+			description: "",
+			duration: 30,
+			event: null
+		};
 		this.addMeeting = this.addMeeting.bind(this);
-	}
-
-	state = {
-		meetingTitle: ""
 	}
 
 	showCalendar() {
@@ -42,20 +44,39 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
-	handleNewInvitee = () => {
+	handleNewInvitee = (invitees) => {
+		this.setState({
+			invitees: invitees
+		})
+		console.log(this.state.invitees);
 		this.hideCalendar();
 	}
 
-	handleTitleChange = (evt) => {
+	handleTitleChange = (event) => {
 		this.setState({
-		  meetingTitle: evt.target.value
+		  title: event.target.value
 		});
-		console.log(this.state.meetingTitle)
-	  };
+	};
+
+	handleDescriptionChange = (event) => {
+		this.setState({
+			description: event.target.value
+		});
+	}
+
+	handleDurationChange = (event) => {
+		this.setState({
+			duration: event.target.value
+		});
+	}
+
+	handleEventSelection = (event) => {
+		this.setState({
+			event: event
+		});
+	}
 
 	render() {
-		const isShowCalendar = this.state.isShowCalendar;
-
 		return (
 			<div>
 				<CssBaseline />
@@ -87,9 +108,7 @@ class NewMeeting extends React.Component {
 							id="description"
 							label="Description"
 							className="TextInput"
-							inputRef={(c) => {
-								this.state.description = c?.value || "";
-							}}
+							onChange={this.handleDescriptionChange}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -100,20 +119,30 @@ class NewMeeting extends React.Component {
 							name: 'age',
 							id: 'age-native-helper',
 						}}
+						onChange={this.handleDurationChange}
 						>
-						<option aria-label="None" value="" />
-						<option value={30}>30</option>
-						<option value={60}>60</option>
-						<option value={90}>90</option>
-						<option value={120}>120</option>
+							<option value={30}>30 minutes (default)</option>
+							<option value={60}>60 minutes</option>
+							<option value={90}>90 minutes</option>
+							<option value={120}>120 minutes</option>
 						</NativeSelect>
-						<FormHelperText>Length of meeting (in minutes)</FormHelperText>
 					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
-						{isShowCalendar ? (
+						{this.state.isShowCalendar ? (
 							<>
-								<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
+								<Typography variant="h4" style={{marginTop: "50px"}}>Select a meeting time</Typography>
+								<CalendarPicker duration={this.state.duration} onEventSelection={this.handleEventSelection}/>
+								{this.state.event === null ? (
+								<Button
+									variant="contained"
+									color="primary"
+									size="large"
+									disabled
+								>
+									Create Meeting
+								</Button>
+								) : (
 								<Button
 									variant="contained"
 									color="primary"
@@ -121,8 +150,19 @@ class NewMeeting extends React.Component {
 								>
 									Create Meeting
 								</Button>
+								)}
 							</>
 						) : (
+							this.state.duration === null ? (
+							<Button
+								variant="contained"
+								color="primary"
+								size="large"
+								disabled
+							>
+								Find Times
+							</Button>
+							) : (
 							<Button
 								variant="contained"
 								color="primary"
@@ -133,6 +173,7 @@ class NewMeeting extends React.Component {
 							>
 								Find Times
 							</Button>
+							)
 						)}
 					</Grid>
 				</Grid>
