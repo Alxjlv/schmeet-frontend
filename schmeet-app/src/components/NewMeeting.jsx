@@ -42,18 +42,16 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
-<<<<<<< HEAD
 	handleNewInvitee = () => {
 		this.hideCalendar();
 	}
-=======
+
 	handleTitleChange = (evt) => {
 		this.setState({
 		  meetingTitle: evt.target.value
 		});
 		console.log(this.state.meetingTitle)
 	  };
->>>>>>> master
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
