@@ -157,7 +157,8 @@ class NewMeeting extends React.Component {
 								Duration
 							</InputLabel>
 							<Select
-								value={30}
+								displayEmpty
+								value={this.state.duration}
 								inputProps={{
 									name: "age",
 									id: "age-native-helper",
