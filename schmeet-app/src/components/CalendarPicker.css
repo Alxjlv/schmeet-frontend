@@ -41,7 +41,6 @@
 .event {
     grid-row-start: 2;
     grid-column-start: 2;
-    grid-row-end: span 2;
     padding: 5px;
     /* margin: 0 5px; */
     /* border-radius: 5px; */

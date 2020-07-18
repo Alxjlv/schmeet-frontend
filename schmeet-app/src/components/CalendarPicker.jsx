@@ -8,14 +8,15 @@ class CalendarPicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null
-        }
-        this.findFreeSlots();
+            selected: null,
+            freeEvents: this.findFreeEvents()
+        };
+        console.log(typeof this.props.duration);
     }
 
-    findFreeSlots() {
-        // const duration = this.props.duration;
-        const duration = 60;
+    findFreeEvents() {
+        const duration = this.props.duration;
+        // const duration = 60;
 
         var start;
         var temp;
@@ -27,19 +28,25 @@ class CalendarPicker extends React.Component {
             end = freeSlot.endDate;
             temp = this.addDurationToDate(start, duration);
 
+            console.log(start);
+            console.log(end);
+            console.log(temp);
+            console.log(temp <= end);
+
             while (temp <= end) {
                 freeEvent = {
                     startDate: start,
                     endDate: temp
                 };
-                // console.log(freeEvent);
                 freeEvents.push(freeEvent);
 
                 start = temp;
                 temp = this.addDurationToDate(start, duration);
             }
         }
-        this.state.freeEvents = freeEvents;
+
+        console.log(freeEvents);
+        return freeEvents;
     }
 
     addDurationToDate(start, durationMinutes) {
@@ -85,6 +92,7 @@ class CalendarPicker extends React.Component {
         this.setState({
             selected: event
         });
+        this.props.onEventSelection(event);
     }
 
     render() {
@@ -132,9 +140,21 @@ class CalendarPicker extends React.Component {
                 <div className="item time"><Typography variant="button">4 PM</Typography></div>
                 <div className="item time"><Typography variant="button">5 PM</Typography></div>
                 {this.state.freeEvents.map((event) => {
+                    var className;
+                    if (this.props.duration == 60) {
+                        className = "item event event-60";
+                    } else if (this.props.duration == 90) {
+                        className = "item event event-90";
+                    } else if (this.props.duration == 120) {
+                        className = "item event event-120";
+                    } else {
+                        className = "item event";
+                    }
+                    console.log(this.props.duration);
+                    console.log(className);
                     return (
-                        <div className="item event event-60" style={{gridRowStart: this.getRowOffset(event.startDate), gridColumnStart: this.getColumnOffset(event.startDate)}}>
-                            <CalendarEventButton time={this.getDateString(event.startDate)} eventID={event} isSelected={this.state.selected == event} onSelect={this.handleEventSelection}/>
+                        <div className={className} style={{gridRowStart: this.getRowOffset(event.startDate), gridColumnStart: this.getColumnOffset(event.startDate)}}>
+                            <CalendarEventButton time={this.getDateString(event.startDate)} eventID={event} isSelected={this.state.selected === event} onSelect={this.handleEventSelection}/>
                         </div>
                     );
                 })}

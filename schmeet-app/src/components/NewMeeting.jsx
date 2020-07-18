@@ -9,16 +9,14 @@ class NewMeeting extends React.Component {
 		super(props);
 		this.state = {
 			isShowCalendar: false,
+			isEventSelected: false,
 			title: "",
 			description: "",
-			duration: ""
+			duration: null,
+			event: null
 		};
 		this.addMeeting = this.addMeeting.bind(this);
 	}
-
-	// state = {
-	// 	meetingTitle: ""
-	// }
 
 	showCalendar() {
 		this.setState({
@@ -46,7 +44,10 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
-	handleNewInvitee = () => {
+	handleNewInvitee = (invitees) => {
+		this.setState({
+			invitees: invitees
+		})
 		this.hideCalendar();
 	}
 
@@ -66,11 +67,16 @@ class NewMeeting extends React.Component {
 		this.setState({
 			duration: event.target.value
 		});
+		this.hideCalendar();
+	}
+
+	handleEventSelection = (event) => {
+		this.setState({
+			event: event
+		});
 	}
 
 	render() {
-		const isShowCalendar = this.state.isShowCalendar;
-
 		return (
 			<div>
 				<CssBaseline />
@@ -102,10 +108,7 @@ class NewMeeting extends React.Component {
 							id="description"
 							label="Description"
 							className="TextInput"
-							onChange={this.state.description}
-							inputRef={(c) => {
-								this.state.description = c?.value || "";
-							}}
+							onChange={this.handleDescriptionChange}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -127,11 +130,20 @@ class NewMeeting extends React.Component {
 					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
-					<Typography variant="h4" style={{marginTop: "50px"}}>Select a meeting time</Typography>
-					<CalendarPicker duration={this.state.duration}/>
-						{isShowCalendar ? (
+						{this.state.isShowCalendar ? (
 							<>
-								{/* <BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} /> */}
+								<Typography variant="h4" style={{marginTop: "50px"}}>Select a meeting time</Typography>
+								<CalendarPicker duration={this.state.duration} onEventSelection={this.handleEventSelection}/>
+								{this.state.event === null ? (
+								<Button
+									variant="contained"
+									color="primary"
+									size="large"
+									disabled
+								>
+									Create Meeting
+								</Button>
+								) : (
 								<Button
 									variant="contained"
 									color="primary"
@@ -139,8 +151,19 @@ class NewMeeting extends React.Component {
 								>
 									Create Meeting
 								</Button>
+								)}
 							</>
 						) : (
+							this.state.duration === null ? (
+							<Button
+								variant="contained"
+								color="primary"
+								size="large"
+								disabled
+							>
+								Find Times
+							</Button>
+							) : (
 							<Button
 								variant="contained"
 								color="primary"
@@ -151,6 +174,7 @@ class NewMeeting extends React.Component {
 							>
 								Find Times
 							</Button>
+							)
 						)}
 					</Grid>
 				</Grid>
