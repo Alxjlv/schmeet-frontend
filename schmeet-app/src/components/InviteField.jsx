@@ -1,63 +1,79 @@
 import React from "react";
 import "../App.css";
-import { TextField, Chip } from "@material-ui/core";
-import ClearIcon from "@material-ui/icons/Clear";
+import { TextField, IconButton, Chip } from "@material-ui/core";
+import AddCircle from "@material-ui/icons/AddCircle";
 
 class InviteField extends React.Component {
-	state = {
-		value: "",
-		emails: [],
-	};
+  state = {
+    value: "",
+    emails: [],
+  };
 
-	handleChange = (evt) => {
-		this.setState({
-			value: evt.target.value,
-		});
-	};
+  handleChange = (evt) => {
+    this.setState({
+      value: evt.target.value,
+    });
+  };
 
-	handleKeyDown = (evt) => {
-		if (["Enter", "Tab", ","].includes(evt.key)) {
-			evt.preventDefault();
+  handleKeyDown = (evt) => {
+    if (["Enter", "Tab", ","].includes(evt.key)) {
+      evt.preventDefault();
 
-			var email = this.state.value.trim();
+      var email = this.state.value.trim();
 
-			if (email) {
-				this.setState({
-					emails: [...this.state.emails, email],
-					value: "",
-				});
-			}
-		}
-	};
+      if (email) {
+        this.setState({
+          emails: [...this.state.emails, email],
+          value: "",
+        });
+      }
+    }
+  };
 
-	handleDelete = (evt) => {};
+  handlePlusButton = (evt) => {
+    var email = this.state.value.trim();
+    if (email) {
+      this.setState({
+        emails: [...this.state.emails, email],
+        value: "",
+      });
+    }
+  };
 
-	render() {
-		const len = this.state.emails.length;
-		return (
-			<div>
-				<TextField
-					className="TextInput"
-					label="Invitees"
-					value={this.state.value}
-					onChange={this.handleChange}
-					onKeyDown={this.handleKeyDown}
-					autoFocus={true}
-					style={{ marginBottom: len === 0 ? "42px" : "0px" }}
-				/>
-				<br />
-				{this.state.emails.map((email) => (
-					<Chip
-						className="Chip"
-						key={email}
-						label={email}
-						onDelete={this.handleDelete}
-						color="primary"
-					></Chip>
-				))}
-			</div>
-		);
-	}
+  handleDelete = (evt) => {};
+
+  render() {
+    const len = this.state.emails.length;
+    return (
+      <div>
+        <TextField
+          className="TextInput"
+          label="Invitees"
+          value={this.state.value}
+          onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
+          autoFocus={true}
+          style={{ marginBottom: len === 0 ? "42px" : "0px" }}
+        />
+        <IconButton
+          onClick={this.handlePlusButton}
+          style={{ marginLeft: "-40px", marginBottom: "-32px" }}
+        >
+          <AddCircle color="primary" />
+        </IconButton>
+        <br />
+        {this.state.emails.map((email) => (
+          <Chip
+            className="Chip"
+            key={email}
+            label={email}
+            onDelete={this.handleDelete}
+            color="primary"
+          ></Chip>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default InviteField;
