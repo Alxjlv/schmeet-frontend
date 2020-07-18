@@ -3,6 +3,7 @@ import "../App.css";
 import { Grid, CssBaseline, FormControl, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
 import InviteField from "./InviteField";
 import CalendarPicker from "./CalendarPicker";
+import { Redirect } from "react-router-dom";
 
 class NewMeeting extends React.Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class NewMeeting extends React.Component {
 		this.state = {
 			isShowCalendar: false,
 			isEventSelected: false,
+			redirect: false,
 			invitees: null,
 			title: "",
 			description: "",
@@ -89,21 +91,24 @@ class NewMeeting extends React.Component {
 			members: members
 		};
 		console.log(newMeeting);
-		// const newMeeting = {
-		// 	...data,
-		// 	title: this.state.title,
-		// 	description: this.state.description,
-		// 	link: "REPLACE THIS WITH ZOOM LINK",
-		// };
-		// console.log(newMeeting);
-		// Now save the new meeting
-		// TODO: Tait save meeting into JSON file
-		// window.location = "/";
+
+		const meetings = JSON.parse(localStorage.getItem("meetings"));
+		meetings.push(newMeeting);
+		localStorage.setItem("meetings", JSON.stringify(meetings));
+
+		this.setState({
+			redirect: true
+		});
 	}
 
 	render() {
+		if (this.state.redirect) {
+			return <Redirect to='/'></Redirect>
+		}
+
 		return (
 			<div>
+
 				<CssBaseline />
 
 				<Typography
