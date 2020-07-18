@@ -9,6 +9,20 @@ export const appointments = [
 			"Plan how to re-design the website with Tait, Seif, and Aiden",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Tait Fuller",
+				initial: "TF"
+			},
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			}
+		]
 	},
 	{
 		title: "Watch Hamilton",
@@ -19,6 +33,32 @@ export const appointments = [
 		description: "Go and watch the hamilton movie woooooo!!",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Tait Fuller",
+				initial: "TF"
+			},
+			{
+				name: "Ben Piper",
+				initial: "BP"
+			},
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			},
+			{
+				name: "Alex Verkerk",
+				initial: "AV"
+			},
+			{
+				name: "Oliver Chamberlain",
+				initial: "OC"
+			},
+		]
 	},
 	{
 		title: "Break Time",
@@ -29,6 +69,24 @@ export const appointments = [
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Ben Piper",
+				initial: "BP"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			},
+			{
+				name: "Alex Verkerk",
+				initial: "AV"
+			},
+			{
+				name: "Oliver Chamberlain",
+				initial: "OC"
+			},
+		]
 	},
 	{
 		title: "Break Time",
@@ -39,6 +97,24 @@ export const appointments = [
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			},
+			{
+				name: "Alex Verkerk",
+				initial: "AV"
+			},
+			{
+				name: "Oliver Chamberlain",
+				initial: "OC"
+			},
+		]
 	},
 	{
 		title: "Break Time",
@@ -49,6 +125,24 @@ export const appointments = [
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Tait Fuller",
+				initial: "TF"
+			},
+			{
+				name: "Ben Piper",
+				initial: "BP"
+			},
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			}
+		]
 	},
 	{
 		title: "Break Time",
@@ -59,6 +153,24 @@ export const appointments = [
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Tait Fuller",
+				initial: "TF"
+			},
+			{
+				name: "Ben Piper",
+				initial: "BP"
+			},
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Oliver Chamberlain",
+				initial: "OC"
+			},
+		]
 	},
 	{
 		title: "Break Time",
@@ -69,6 +181,24 @@ export const appointments = [
 		description: "Take a break mate",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Tait Fuller",
+				initial: "TF"
+			},
+			{
+				name: "Seif Younes",
+				initial: "SY"
+			},
+			{
+				name: "Alex Verkerk",
+				initial: "AV"
+			},
+			{
+				name: "Oliver Chamberlain",
+				initial: "OC"
+			},
+		]
 	},
 	{
 		title: "Another Meeting with Leon",
@@ -79,5 +209,15 @@ export const appointments = [
 		description: "Probably the best time you'll ever have in your life",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
+		members: [
+			{
+				name: "Aiden Burgess",
+				initial: "AB"
+			},
+			{
+				name: "Leon Chin",
+				initial: "LC"
+			}
+		]
 	},
 ];
