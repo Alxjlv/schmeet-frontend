@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar.jsx";
 import { Switch, Route } from "react-router-dom";
 import NewMeeting from "./components/NewMeeting";
 import HomePage from "./components/HomePage";
+import Footer from "./components/Footer";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				<Route exact path="/NewMeeting" component={NewMeeting}></Route>
 				<Route exact path="/" component={HomePage}></Route>
 			</Switch>
+			<Footer />
 		</div>
 	);
 }
