@@ -40,6 +40,7 @@ class NewMeeting extends React.Component {
 		this.setState({
 		  meetingTitle: evt.target.value
 		});
+		console.log(this.state.meetingTitle)
 	  };
 
 	render() {
@@ -83,7 +84,7 @@ class NewMeeting extends React.Component {
 					</Grid>
 					<Grid item xs={12}>
 					<FormControl className="TextInput">
-						<InputLabel htmlFor="age-native-helper">Age</InputLabel>
+						<InputLabel htmlFor="age-native-helper">Duration</InputLabel>
 						<NativeSelect
 						inputProps={{
 							name: 'age',
@@ -96,12 +97,12 @@ class NewMeeting extends React.Component {
 						<option value={90}>90</option>
 						<option value={120}>120</option>
 						</NativeSelect>
-						<FormHelperText>Length (in minutes)</FormHelperText>
+						<FormHelperText>Length of meeting (in minutes)</FormHelperText>
 					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
 						{isShowCalendar ? (
-							<BaseCalendar onAddMeeting={this.addMeeting} />
+							<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
 						) : (
 							<Button
 								variant="contained"

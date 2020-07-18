@@ -71,7 +71,6 @@ const BaseCalendar = (props) => {
 				borderRadius: "8px",
 			}}
 		>
-			{console.log(children)}
 		</Appointments.Appointment>
 	);
 
