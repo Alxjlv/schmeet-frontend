@@ -6,9 +6,9 @@ import {
 	Typography,
 	Paper,
 	Divider,
-	Box
+	Box,
 } from "@material-ui/core";
-import MeetingCard from './MeetingCard';
+import MeetingCard from "./MeetingCard";
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -17,12 +17,14 @@ export default class HomePage extends Component {
 
 	cardList(day) {
 		return JSON.parse(localStorage.getItem("meetings"))
-			.filter((meeting) => new Date(meeting.startDate).getUTCDay() === day)
+			.filter(
+				(meeting) => new Date(meeting.startDate).getUTCDay() === day
+			)
 			.sort((a, b) => {
 				a = new Date(a.startDate);
 				b = new Date(b.startDate);
 				if (a.getTime() === b.getTime()) {
-					return 0
+					return 0;
 				} else if (a.getTime() <= b.getTime()) {
 					return -1;
 				} else {
@@ -31,7 +33,11 @@ export default class HomePage extends Component {
 			})
 			.map((meeting) => {
 				return (
-					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
+					<MeetingCard
+						meeting={meeting}
+						day={day}
+						style={{ margin: "20px" }}
+					/>
 				);
 			});
 	}
