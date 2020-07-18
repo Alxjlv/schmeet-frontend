@@ -22,7 +22,7 @@ export default class HomePage extends Component {
 
 	cardList(day) {
 		return this.state.meetings
-			.filter((meeting) => meeting.startDate.getDay() - 1 === day)
+			.filter((meeting) => meeting.startDate.getUTCDay() === day)
 			.map((meeting) => {
 				return (
 					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
@@ -32,18 +32,18 @@ export default class HomePage extends Component {
 
 	intToDay = (day) => {
 		return [
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-			"Sunday",
+			"Sunday 19th",
+			"Monday 20th",
+			"Tuesday 21st",
+			"Wednesday 22nd",
+			"Thursday 23rd",
+			"Friday 24th",
+			"Saturday 25th",
 		][day];
 	};
 
 	render() {
-		const numColumns = 5;
+		const numColumns = 7;
 		const columns = [];
 		for (let i = 0; i < numColumns; i++) {
 			columns.push(
@@ -54,7 +54,7 @@ export default class HomePage extends Component {
 							paddingTop: 15,
 							minHeight: "100%",
 							background:
-								i === 1 &&
+								i === 0 &&
 								"linear-gradient(to right, #36d1dc, #5b86e5)",
 						}}
 					>
@@ -63,10 +63,10 @@ export default class HomePage extends Component {
 							variant="h4"
 							component="h2"
 							style={{
-								color: i === 1 && "white",
+								color: i === 0 && "white",
 							}}
 						>
-							{this.intToDay(i)} {13 + i + "th"}
+							{this.intToDay(i)}
 						</Typography>
 						<Divider />
 						{this.cardList(i)}
@@ -98,7 +98,7 @@ export default class HomePage extends Component {
 						Previous Week
 					</Button>
 					<Typography gutterBottom variant="h2" component="h2">
-						Schedule for 13th - 18th of July
+						Schedule for 19th - 25th of July
 					</Typography>
 					<Button
 						variant="contained"

@@ -61,7 +61,7 @@ function MeetingCard(props) {
 			<CardActions>
 				<Grid container direction="row" justify="space-between">
 					<Grid>
-						{props.day === 1 && (
+						{props.day === 0 && (
 							<Button
 								variant="contained"
 								size="medium"
