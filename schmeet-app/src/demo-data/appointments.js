@@ -5,6 +5,8 @@ export const appointments = [
 		endDate: new Date(2018, 5, 25, 11, 30),
 		id: 0,
 		location: "Room 1",
+		description:
+			"This is the descirpotion of what is happenign at this stime",
 	},
 	{
 		title: "Book Flights to San Fran for Sales Trip",
