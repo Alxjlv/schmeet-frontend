@@ -15,7 +15,7 @@ import {
 
 import { appointments } from "../demo-data/appointments";
 
-const currentDate = "2020-07-23";
+const currentDate = "2020-07-13";
 const BaseCalendar = () => {
 	const [data, setData] = React.useState(appointments);
 	const [addedAppointment, setAddedAppointment] = React.useState({});
