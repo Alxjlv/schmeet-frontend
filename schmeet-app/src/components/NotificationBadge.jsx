@@ -96,8 +96,8 @@ export default function NotificationBadge() {
 					</Alert>
 				</StyledMenuItem>
 				<StyledMenuItem>
-					<Alert severity="error" style={{ width: "100%" }}>
-						This is an error message!
+					<Alert severity="info" style={{ width: "100%" }}>
+						Steven has declined your "Scrum meeting" invitation
 					</Alert>
 				</StyledMenuItem>
 			</StyledMenu>

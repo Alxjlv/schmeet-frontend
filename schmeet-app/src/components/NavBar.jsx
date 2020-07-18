@@ -37,10 +37,12 @@ function NavBar() {
 							>
 								New Meeting
 							</Button>
-							<NotificationBadge
-								className="NavBarItem"
-								style={{ float: "right" }}
-							/>
+							<div style={{ float: "right", marginRight: 30 }}>
+								<NotificationBadge
+									className="NavBarItem"
+									style={{ left: "30px", float: "right" }}
+								/>
+							</div>
 						</Grid>
 					</Grid>
 				</Toolbar>
