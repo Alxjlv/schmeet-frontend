@@ -10,17 +10,10 @@ import {
 	Typography,
 	CardContent,
 	CardActions,
-	CardMedia,
 	Paper,
 	Divider,
 } from "@material-ui/core";
-import appointments from "../demo-data/today-appointments";
-
-const useStyles = makeStyles({
-	root: {
-		maxWidth: 345,
-	},
-});
+import { appointments } from "../demo-data/appointments";
 
 const MeetingCard = (props) => (
 	<Card style={{ maxWidth: 345, margin: 10 }}>
@@ -39,7 +32,8 @@ const MeetingCard = (props) => (
 					{props.meeting.description}
 				</Typography>
 				<Typography variant="subtitle2" align="left">
-					4PM - 4:30PM
+					{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
+					{formatToHoursAndMinutes(props.meeting.endDate)}
 				</Typography>
 			</CardContent>
 		</CardActionArea>
@@ -47,12 +41,23 @@ const MeetingCard = (props) => (
 			<Button size="medium" color="primary">
 				Share
 			</Button>
-			<Button size="medium" color="primary">
+			<Button size="medium" color="primary" href={props.meeting.link}>
 				Join
 			</Button>
 		</CardActions>
 	</Card>
 );
+
+const formatToHoursAndMinutes = (date) => {
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var ampm = hours >= 12 ? "pm" : "am";
+	hours = hours % 12;
+	hours = hours ? hours : 12; // the hour '0' should be '12'
+	minutes = minutes < 10 ? "0" + minutes : minutes;
+	var strTime = hours + ":" + minutes + ampm;
+	return strTime;
+};
 
 export default class ExercisesList extends Component {
 	constructor(props) {
