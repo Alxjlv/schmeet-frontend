@@ -16,26 +16,24 @@ import { appointments } from "../demo-data/appointments";
 
 const MeetingCard = (props) => (
 	<Card style={{ maxWidth: 345, margin: 10 }}>
-		<CardActionArea>
-			<CardContent>
-				<Typography gutterBottom variant="h6" component="h4">
-					{props.meeting.title}
-				</Typography>
-				<Typography
-					variant="body2"
-					color="textSecondary"
-					component="p"
-					align="left"
-					gutterBottom
-				>
-					{props.meeting.description}
-				</Typography>
-				<Typography variant="subtitle2" align="left">
-					{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
-					{formatToHoursAndMinutes(props.meeting.endDate)}
-				</Typography>
-			</CardContent>
-		</CardActionArea>
+		<CardContent>
+			<Typography gutterBottom variant="h6" component="h4">
+				{props.meeting.title}
+			</Typography>
+			<Typography
+				variant="body2"
+				color="textSecondary"
+				component="p"
+				align="left"
+				gutterBottom
+			>
+				{props.meeting.description}
+			</Typography>
+			<Typography variant="subtitle2" align="left">
+				{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
+				{formatToHoursAndMinutes(props.meeting.endDate)}
+			</Typography>
+		</CardContent>
 		<CardActions>
 			<Button size="medium" color="primary">
 				Invite
