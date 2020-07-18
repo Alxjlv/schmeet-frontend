@@ -64,6 +64,7 @@ class NewMeeting extends React.Component {
 							: <Button variant="contained" color="primary" size="large" onClick={() => {this.showCalendar()}}>Find Times</Button>
 						}
 					</Grid>
+
 				</Grid>
 			</div>
 		)
