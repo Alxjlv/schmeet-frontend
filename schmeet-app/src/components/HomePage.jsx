@@ -152,7 +152,7 @@ export default class HomePage extends Component {
 						style={{
 							float: "right",
 							marginRight: "20px",
-							height: 50,
+							height: 40,
 						}}
 					>
 						Next Week
@@ -166,7 +166,7 @@ export default class HomePage extends Component {
 						style={{
 							float: "right",
 							marginRight: "20px",
-							height: 50,
+							height: 40,
 						}}
 					>
 						Previous Week
