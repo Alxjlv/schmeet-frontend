@@ -11,7 +11,11 @@ import {
 	Paper,
 	Divider,
 	Box,
+	Avatar
 } from "@material-ui/core";
+import {
+	AvatarGroup
+} from "@material-ui/lab";
 import { appointments } from "../demo-data/appointments";
 
 const MeetingCard = (props) => (
@@ -35,17 +39,26 @@ const MeetingCard = (props) => (
 			</Typography>
 		</CardContent>
 		<CardActions>
-			<Button size="medium" color="primary">
-				Invite
-			</Button>
-			<Button
+			{props.day ===1 && <Button
+				variant="contained"
 				size="medium"
 				color="primary"
 				href={props.meeting.link}
-				target="blank"
-			>
+				target="blank">
 				Join
+			</Button>}
+			<Button
+				variant="outlined"
+				size="medium"
+				color="primary">
+				Invite
 			</Button>
+			<AvatarGroup max={3}>
+				<Avatar alt="Tait Fuller">TF</Avatar>
+				<Avatar alt="Alex Verkerk">AV</Avatar>
+				<Avatar alt="Oliver Chamberlain">OC</Avatar>
+				<Avatar alt="Ben Piper">BP</Avatar>
+			</AvatarGroup>
 		</CardActions>
 	</Card>
 );
@@ -75,7 +88,7 @@ export default class HomePage extends Component {
 			.filter((meeting) => meeting.startDate.getDay() - 1 === day)
 			.map((meeting) => {
 				return (
-					<MeetingCard meeting={meeting} style={{ margin: "20px" }} />
+					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
 				);
 			});
 	}
