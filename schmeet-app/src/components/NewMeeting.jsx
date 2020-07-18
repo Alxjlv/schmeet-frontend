@@ -12,7 +12,7 @@ class NewMeeting extends React.Component {
 			isEventSelected: false,
 			title: "",
 			description: "",
-			duration: null,
+			duration: 30,
 			event: null
 		};
 		this.addMeeting = this.addMeeting.bind(this);
