@@ -7,42 +7,21 @@ import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-const themeObject = {
-	palette: {
-		primary: {
-			main: "#2196f3",
-		},
-		type: "dark",
-	},
-};
-
-const useDarkMode = () => {
-	const [theme, setTheme] = useState(themeObject);
-
-	const {
-		palette: { type },
-	} = theme;
-	const toggleDarkMode = () => {
-		const updatedTheme = {
-			...theme,
-			palette: {
-				...theme.palette,
-				type: type === "light" ? "dark" : "light",
-			},
-		};
-		setTheme(updatedTheme);
-		return updatedTheme.palette.type;
-	};
-	return [theme, toggleDarkMode];
-};
-
 function App() {
-	const [theme, toggleDarkMode] = useDarkMode();
-	const themeConfig = createMuiTheme(theme);
+	const [darkState, setDarkState] = useState(false);
+	const palletType = darkState ? "dark" : "light";
+	const darkTheme = createMuiTheme({
+		palette: {
+			type: palletType,
+		},
+	});
+	const handleThemeChange = () => {
+		setDarkState(!darkState);
+	};
 	return (
 		<div className="App">
-			<MuiThemeProvider theme={themeConfig}>
-				<NavBar theme={themeConfig} toggleDarkMode={toggleDarkMode} />
+			<MuiThemeProvider theme={darkTheme}>
+				<NavBar theme={darkState} toggleDarkMode={handleThemeChange} />
 				<Switch>
 					<Route
 						exact

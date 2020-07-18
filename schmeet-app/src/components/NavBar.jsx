@@ -17,9 +17,7 @@ function NavBar({ theme, toggleDarkMode }) {
 						<Grid item xs={6} component={Link} to="/">
 							<img
 								className="NavBarItem"
-								src={
-									theme.type == "light" ? logoLight : logoDark
-								}
+								src={!theme ? logoLight : logoDark}
 								style={{ float: "left" }}
 							/>
 						</Grid>
