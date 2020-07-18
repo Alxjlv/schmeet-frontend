@@ -107,6 +107,7 @@ class NewMeeting extends React.Component {
 		meetings.push(newMeeting);
 		localStorage.setItem("meetings", JSON.stringify(meetings));
 
+		this.props.openToast();
 		this.setState({
 			redirect: true,
 		});
@@ -120,7 +121,6 @@ class NewMeeting extends React.Component {
 		return (
 			<div>
 				<CssBaseline />
-
 				<Typography
 					variant="h2"
 					style={{
