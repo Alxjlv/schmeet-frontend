@@ -4,19 +4,23 @@ import {
 	Card,
 	Button,
 	CssBaseline,
-	CardActionArea,
 	Typography,
 	CardContent,
 	CardActions,
 	Paper,
 	Divider,
 	Box,
-	Avatar
+	Avatar,
+	Grid
 } from "@material-ui/core";
 import {
 	AvatarGroup
 } from "@material-ui/lab";
 import { appointments } from "../demo-data/appointments";
+
+const joinButtonStyle = {
+	marginRight: '8px'
+}
 
 const MeetingCard = (props) => (
 	<Card style={{ maxWidth: 345, margin: 10 }}>
@@ -39,26 +43,31 @@ const MeetingCard = (props) => (
 			</Typography>
 		</CardContent>
 		<CardActions>
-			{props.day ===1 && <Button
-				variant="contained"
-				size="medium"
-				color="primary"
-				href={props.meeting.link}
-				target="blank">
-				Join
-			</Button>}
-			<Button
-				variant="outlined"
-				size="medium"
-				color="primary">
-				Invite
-			</Button>
-			<AvatarGroup max={3}>
-				<Avatar alt="Tait Fuller">TF</Avatar>
-				<Avatar alt="Alex Verkerk">AV</Avatar>
-				<Avatar alt="Oliver Chamberlain">OC</Avatar>
-				<Avatar alt="Ben Piper">BP</Avatar>
-			</AvatarGroup>
+			<Grid container direction="row" justify="space-between">
+				<Grid>
+					{props.day ===1 && <Button
+						variant="contained"
+						size="medium"
+						color="primary"
+						href={props.meeting.link}
+						target="blank"
+						style={joinButtonStyle}>
+						Join
+					</Button>}
+					<Button
+						variant="outlined"
+						size="medium"
+						color="primary">
+						Invite
+					</Button>
+				</Grid>
+				<AvatarGroup max={3}>
+					<Avatar alt="Tait Fuller">TF</Avatar>
+					<Avatar alt="Alex Verkerk">AV</Avatar>
+					<Avatar alt="Oliver Chamberlain">OC</Avatar>
+					<Avatar alt="Ben Piper">BP</Avatar>
+				</AvatarGroup>
+			</Grid>
 		</CardActions>
 	</Card>
 );
