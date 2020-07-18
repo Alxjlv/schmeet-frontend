@@ -10,14 +10,13 @@ import {
 	WeekView,
 	Appointments,
 	AppointmentForm,
-	AppointmentTooltip,
 	DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
 
 import { appointments } from "../demo-data/appointments";
 
 const currentDate = "2018-06-27";
-export default () => {
+const BaseCalendar = () => {
 	const [data, setData] = React.useState(appointments);
 	const [addedAppointment, setAddedAppointment] = React.useState({});
 	const [
@@ -126,3 +125,5 @@ export default () => {
 		</React.Fragment>
 	);
 };
+
+export default BaseCalendar;

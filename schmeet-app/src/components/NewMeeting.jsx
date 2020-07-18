@@ -1,29 +1,10 @@
 import React from "react";
 import "../App.css";
-import {
-	Grid,
-	CssBaseline,
-	Paper,
-	TextField,
-	Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { sizing } from "@material-ui/system";
-import BaseCalendar from "./baseCalendar.js"
-import InviteField from "./InviteField.jsx";
-
-const useStyles = makeStyles({
-	root: {
-		// width: "75%",
-	},
-	textField: {
-		width: "60%",
-	},
-});
+import { Grid, CssBaseline, TextField, Typography } from "@material-ui/core";
+import BaseCalendar from "./BaseCalendar";
+import InviteField from "./InviteField";
 
 function NewMeeting() {
-	const classes = useStyles();
-
 	return (
 		<div>
 			<CssBaseline />
@@ -64,7 +45,7 @@ function NewMeeting() {
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					<BaseCalendar/>
+					<BaseCalendar />
 				</Grid>
 			</Grid>
 		</div>
