@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { AppBar, Avatar, Button, Grid, Toolbar } from "@material-ui/core";
 import logoLight from "../images/schmeet-light.png";
@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import NotificationBadge from "./NotificationBadge";
 import profImage from "../images/account4.png";
 
-function NavBar() {
+function NavBar({ theme, toggleDarkMode }) {
+	useEffect(() => {});
 	return (
 		<div className="NavBar">
 			<AppBar className="TopNavbar" position="static" color="transparent">
@@ -16,7 +17,9 @@ function NavBar() {
 						<Grid item xs={6} component={Link} to="/">
 							<img
 								className="NavBarItem"
-								src={logoLight}
+								src={
+									theme.type == "light" ? logoLight : logoDark
+								}
 								style={{ float: "left" }}
 							/>
 						</Grid>
@@ -38,6 +41,9 @@ function NavBar() {
 								to="/NewMeeting"
 							>
 								New Meeting
+							</Button>
+							<Button onClick={toggleDarkMode}>
+								Switch Theme
 							</Button>
 							<div style={{ float: "right", marginRight: 30 }}>
 								<NotificationBadge
