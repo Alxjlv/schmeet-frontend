@@ -51,8 +51,8 @@ export const appointments = [
 	},
 	{
 		title: "Watch Hamilton",
-		startDate: new Date("2020-07-20T17:30"),
-		endDate: new Date("2020-07-20T20:30"),
+		startDate: new Date("2020-07-21T17:30"),
+		endDate: new Date("2020-07-21T20:30"),
 		location: "Room 1",
 		description: "Go and watch the hamilton movie woooooo!!",
 		link:

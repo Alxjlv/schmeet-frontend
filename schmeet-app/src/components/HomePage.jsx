@@ -23,6 +23,15 @@ export default class HomePage extends Component {
 	cardList(day) {
 		return this.state.meetings
 			.filter((meeting) => meeting.startDate.getUTCDay() === day)
+			.sort((a, b) => {
+				if (a.startDate.getTime() === b.startDate.getTime()) {
+					return 0
+				} else if (a.startDate.getTime() <= b.startDate.getTime()) {
+					return -1;
+				} else {
+					return 1;
+				}
+			})
 			.map((meeting) => {
 				return (
 					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
@@ -43,7 +52,7 @@ export default class HomePage extends Component {
 	};
 
 	render() {
-		const numColumns = 7;
+		const numColumns = 5;
 		const columns = [];
 		for (let i = 0; i < numColumns; i++) {
 			columns.push(
