@@ -1,12 +1,6 @@
 import React from "react";
 import "../App.css";
-import {
-	Grid,
-	CssBaseline,
-	TextField,
-	Typography,
-	Button,
-} from "@material-ui/core";
+import { Grid, CssBaseline, FormControl, FormHelperText, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
 import BaseCalendar from "./BaseCalendar";
 import InviteField from "./InviteField";
 // import { ReactComponent } from "*.svg";
@@ -16,6 +10,10 @@ class NewMeeting extends React.Component {
 		super(props);
 		this.state = { isShowCalendar: false, title: "", description: "" };
 		this.addMeeting = this.addMeeting.bind(this);
+	}
+
+	state = {
+		meetingTitle: ""
 	}
 
 	showCalendar() {
@@ -44,9 +42,18 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
+<<<<<<< HEAD
 	handleNewInvitee = () => {
 		this.hideCalendar();
 	}
+=======
+	handleTitleChange = (evt) => {
+		this.setState({
+		  meetingTitle: evt.target.value
+		});
+		console.log(this.state.meetingTitle)
+	  };
+>>>>>>> master
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
@@ -73,9 +80,8 @@ class NewMeeting extends React.Component {
 							id="title"
 							label="Title"
 							className="TextInput"
-							inputRef={(c) => {
-								this.state.title = c?.value || "";
-							}}
+							value={this.state.meetingTitle}
+							onChange={this.handleTitleChange}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -89,16 +95,27 @@ class NewMeeting extends React.Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<TextField
-							id="length"
-							label="Length (in minutes)"
-							className="TextInput"
-						/>
+					<FormControl className="TextInput">
+						<InputLabel htmlFor="age-native-helper">Duration</InputLabel>
+						<NativeSelect
+						inputProps={{
+							name: 'age',
+							id: 'age-native-helper',
+						}}
+						>
+						<option aria-label="None" value="" />
+						<option value={30}>30</option>
+						<option value={60}>60</option>
+						<option value={90}>90</option>
+						<option value={120}>120</option>
+						</NativeSelect>
+						<FormHelperText>Length of meeting (in minutes)</FormHelperText>
+					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
 						{isShowCalendar ? (
 							<>
-								<BaseCalendar onAddMeeting={this.addMeeting} />
+								<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
 								<Button
 									variant="contained"
 									color="primary"

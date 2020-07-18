@@ -16,7 +16,7 @@ class InviteField extends React.Component {
   };
 
   handleKeyDown = (evt) => {
-    if (["Enter", "Tab", ","].includes(evt.key)) {
+    if (["Enter", ","].includes(evt.key)) {
       evt.preventDefault();
 
       var email = this.state.value.trim();

@@ -29,7 +29,7 @@ const BaseCalendar = (props) => {
 	};
 
 	const onAddedAppointmentChange = React.useCallback((appointment) => {
-		appointment.title = "from field";
+		appointment.title = props.meetingTitle;
 		setAddedAppointment(appointment);
 		setIsAppointmentBeingCreated(true);
 	});
@@ -71,7 +71,6 @@ const BaseCalendar = (props) => {
 				borderRadius: "8px",
 			}}
 		>
-			{console.log(children)}
 		</Appointments.Appointment>
 	);
 
