@@ -1,6 +1,16 @@
 import React from "react";
 import "../App.css";
-import { Grid, CssBaseline, FormControl, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
+import {
+	Grid,
+	CssBaseline,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
+	TextField,
+	Typography,
+	Button,
+} from "@material-ui/core";
 import InviteField from "./InviteField";
 import CalendarPicker from "./CalendarPicker";
 import { Redirect } from "react-router-dom";
@@ -16,79 +26,80 @@ class NewMeeting extends React.Component {
 			title: "",
 			description: "",
 			duration: 30,
-			event: null
+			event: null,
 		};
 		this.createMeeting = this.createMeeting.bind(this);
 	}
 
 	showCalendar() {
 		this.setState({
-			isShowCalendar: true
+			isShowCalendar: true,
 		});
 	}
 
 	hideCalendar() {
 		this.setState({
-			isShowCalendar: false
+			isShowCalendar: false,
 		});
 	}
 
 	handleInviteeChange = (invitees) => {
 		this.setState({
-			invitees: invitees
-		})
+			invitees: invitees,
+		});
 		this.hideCalendar();
-	}
+	};
 
 	handleTitleChange = (event) => {
 		this.setState({
-		  title: event.target.value
+			title: event.target.value,
 		});
 	};
 
 	handleDescriptionChange = (event) => {
 		this.setState({
-			description: event.target.value
+			description: event.target.value,
 		});
-	}
+	};
 
 	handleDurationChange = (event) => {
 		this.setState({
-			duration: event.target.value
+			duration: event.target.value,
 		});
-	}
+	};
 
 	handleEventSelection = (event) => {
 		this.setState({
-			event: event
+			event: event,
 		});
-	}
+	};
 
 	createMeeting() {
 		const members = this.state.invitees.map((invitee) => {
 			var getInitials = function (string) {
-				var names = string.split(' '),
+				var names = string.split(" "),
 					initials = names[0].substring(0, 1).toUpperCase();
-				
+
 				if (names.length > 1) {
-					initials += names[names.length - 1].substring(0, 1).toUpperCase();
+					initials += names[names.length - 1]
+						.substring(0, 1)
+						.toUpperCase();
 				}
 				return initials;
 			};
-			return (
-				{
-					name: invitee,
-					initial: getInitials(invitee)
-				}
-			)
+			return {
+				name: invitee,
+				initial: getInitials(invitee),
+			};
 		});
 		const newMeeting = {
 			title: this.state.title,
 			startDate: this.state.event.startDate,
 			endDate: this.state.event.endDate,
 			description: this.state.description,
-			link: "https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09", // TODO: Update Zoom Link
-			members: members
+			link:
+				"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09", // TODO: Update Zoom Link
+			members: members,
 		};
 		console.log(newMeeting);
 
@@ -97,18 +108,17 @@ class NewMeeting extends React.Component {
 		localStorage.setItem("meetings", JSON.stringify(meetings));
 
 		this.setState({
-			redirect: true
+			redirect: true,
 		});
 	}
 
 	render() {
 		if (this.state.redirect) {
-			return <Redirect to='/'></Redirect>
+			return <Redirect to="/"></Redirect>;
 		}
 
 		return (
 			<div>
-
 				<CssBaseline />
 
 				<Typography
@@ -121,7 +131,7 @@ class NewMeeting extends React.Component {
 					New Meeting
 				</Typography>
 
-				<InviteField onChange={this.handleInviteeChange}/>
+				<InviteField onChange={this.handleInviteeChange} />
 
 				<Grid container spacing={3} className="TextInput">
 					<Grid item xs={12}>
@@ -142,49 +152,62 @@ class NewMeeting extends React.Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-					<FormControl className="TextInput">
-						<InputLabel htmlFor="age-native-helper">Duration</InputLabel>
-						<NativeSelect
-						inputProps={{
-							name: 'age',
-							id: 'age-native-helper',
-						}}
-						onChange={this.handleDurationChange}
-						>
-							<option value={30}>30 minutes (default)</option>
-							<option value={60}>60 minutes</option>
-							<option value={90}>90 minutes</option>
-							<option value={120}>120 minutes</option>
-						</NativeSelect>
-					</FormControl>
+						<FormControl className="TextInput">
+							<InputLabel htmlFor="age-native-helper">
+								Duration
+							</InputLabel>
+							<Select
+								value={30}
+								inputProps={{
+									name: "age",
+									id: "age-native-helper",
+								}}
+								onChange={this.handleDurationChange}
+							>
+								<MenuItem value={30}>
+									30 minutes (default)
+								</MenuItem>
+								<MenuItem value={60}>60 minutes</MenuItem>
+								<MenuItem value={90}>90 minutes</MenuItem>
+								<MenuItem value={120}>120 minutes</MenuItem>
+							</Select>
+						</FormControl>
 					</Grid>
 					<Grid item xs={12}>
 						{this.state.isShowCalendar ? (
 							<>
-								<Typography variant="h4" style={{marginTop: "50px"}}>Select a meeting time</Typography>
-								<CalendarPicker duration={this.state.duration} onEventSelection={this.handleEventSelection}/>
+								<Typography
+									variant="h4"
+									style={{ marginTop: "50px" }}
+								>
+									Select a meeting time
+								</Typography>
+								<CalendarPicker
+									duration={this.state.duration}
+									onEventSelection={this.handleEventSelection}
+								/>
 								{this.state.event === null ? (
-								<Button
-									variant="contained"
-									color="primary"
-									size="large"
-									disabled
-								>
-									Create Meeting
-								</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										size="large"
+										disabled
+									>
+										Create Meeting
+									</Button>
 								) : (
-								<Button
-									variant="contained"
-									color="primary"
-									size="large"
-									onClick={this.createMeeting}
-								>
-									Create Meeting
-								</Button>
+									<Button
+										variant="contained"
+										color="primary"
+										size="large"
+										onClick={this.createMeeting}
+									>
+										Create Meeting
+									</Button>
 								)}
 							</>
-						) : (
-							this.state.duration === null || this.state.invitees === null ? (
+						) : this.state.duration === null ||
+						  this.state.invitees === null ? (
 							<Button
 								variant="contained"
 								color="primary"
@@ -193,7 +216,7 @@ class NewMeeting extends React.Component {
 							>
 								Find Times
 							</Button>
-							) : (
+						) : (
 							<Button
 								variant="contained"
 								color="primary"
@@ -204,7 +227,6 @@ class NewMeeting extends React.Component {
 							>
 								Find Times
 							</Button>
-							)
 						)}
 					</Grid>
 				</Grid>
