@@ -147,7 +147,7 @@ export default class HomePage extends Component {
 							height: 40,
 						}}
 					>
-						Next Week
+						Previous Week
 					</Button>
 					<Typography gutterBottom variant="h2" component="h2">
 						Schedule for 13th - 18th of July
@@ -161,7 +161,7 @@ export default class HomePage extends Component {
 							height: 40,
 						}}
 					>
-						Previous Week
+						Next Week
 					</Button>
 				</Box>
 				<CssBaseline />

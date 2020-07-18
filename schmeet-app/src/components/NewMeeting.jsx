@@ -27,7 +27,7 @@ function NewMeeting() {
 						id="title"
 						label="Title"
 						className="TextInput"
-						autoFocus="true"
+						autoFocus={true}
 					/>
 				</Grid>
 				<Grid item xs={12}>
