@@ -1,20 +1,24 @@
 import React from "react";
 import "../App.css";
-import { Grid, CssBaseline, FormControl, FormHelperText, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
-import BaseCalendar from "./BaseCalendar";
+import { Grid, CssBaseline, FormControl, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
 import InviteField from "./InviteField";
-// import { ReactComponent } from "*.svg";
+import CalendarPicker from "./CalendarPicker";
 
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { isShowCalendar: false, title: "", description: "" };
+		this.state = {
+			isShowCalendar: false,
+			title: "",
+			description: "",
+			duration: ""
+		};
 		this.addMeeting = this.addMeeting.bind(this);
 	}
 
-	state = {
-		meetingTitle: ""
-	}
+	// state = {
+	// 	meetingTitle: ""
+	// }
 
 	showCalendar() {
 		this.setState({
@@ -46,12 +50,23 @@ class NewMeeting extends React.Component {
 		this.hideCalendar();
 	}
 
-	handleTitleChange = (evt) => {
+	handleTitleChange = (event) => {
 		this.setState({
-		  meetingTitle: evt.target.value
+		  title: event.target.value
 		});
-		console.log(this.state.meetingTitle)
-	  };
+	};
+
+	handleDescriptionChange = (event) => {
+		this.setState({
+			description: event.target.value
+		});
+	}
+
+	handleDurationChange = (event) => {
+		this.setState({
+			duration: event.target.value
+		});
+	}
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
@@ -87,6 +102,7 @@ class NewMeeting extends React.Component {
 							id="description"
 							label="Description"
 							className="TextInput"
+							onChange={this.state.description}
 							inputRef={(c) => {
 								this.state.description = c?.value || "";
 							}}
@@ -100,20 +116,22 @@ class NewMeeting extends React.Component {
 							name: 'age',
 							id: 'age-native-helper',
 						}}
+						onChange={this.handleDurationChange}
 						>
-						<option aria-label="None" value="" />
-						<option value={30}>30</option>
-						<option value={60}>60</option>
-						<option value={90}>90</option>
-						<option value={120}>120</option>
+							<option aria-label="None" value="" />
+							<option value={30}>30 minutes</option>
+							<option value={60}>60 minutes</option>
+							<option value={90}>90 minutes</option>
+							<option value={120}>120 minutes</option>
 						</NativeSelect>
-						<FormHelperText>Length of meeting (in minutes)</FormHelperText>
 					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
+					<Typography variant="h4" style={{marginTop: "50px"}}>Select a meeting time</Typography>
+					<CalendarPicker duration={this.state.duration}/>
 						{isShowCalendar ? (
 							<>
-								<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
+								{/* <BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} /> */}
 								<Button
 									variant="contained"
 									color="primary"
