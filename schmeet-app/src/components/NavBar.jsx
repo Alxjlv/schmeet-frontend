@@ -36,6 +36,16 @@ function NavBar() {
 							>
 								New Meeting
 							</Button>
+							<Button
+								className="NavBarItem"
+								variant="contained"
+								color="primary"
+								style={{ float: "right", marginRight: "20px" }}
+								component={Link}
+								to="/"
+							>
+								Connect Calendar
+							</Button>
 						</Grid>
 					</Grid>
 				</Toolbar>
