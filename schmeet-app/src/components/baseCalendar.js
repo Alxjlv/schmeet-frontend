@@ -1,152 +1,153 @@
-import * as React from "react";
-import Paper from "@material-ui/core/Paper";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import * as React from 'react';
+import Paper from '@material-ui/core/Paper';
+import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Typography from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
+import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
-	Scheduler,
-	WeekView,
-	Appointments,
-} from "@devexpress/dx-react-scheduler-material-ui";
-import { withStyles } from "@material-ui/core/styles";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-import appointments from "../demo-data/today-appointments";
+  Scheduler,
+  WeekView,
+  Appointments,
+  AppointmentForm,
+  AppointmentTooltip,
+  DragDropProvider,
+} from '@devexpress/dx-react-scheduler-material-ui';
 
-export default class BaseCalendar extends React.PureComponent {
-	constructor(props) {
-		super(props);
+import { appointments } from '../demo-data/appointments';
 
-		this.clickTableCell = this.clickTableCell.bind(this);
-		this.BlackOutAppointment = this.BlackOutAppointment.bind(this);
-		this.style = this.style.bind(this);
-		this.TimeTableCellBase = this.TimeTableCellBase.bind(this);
+const currentDate = '2018-06-27';
+const editingOptionsList = [
+  { id: 'allowAdding', text: 'Adding' },
+  { id: 'allowDeleting', text: 'Deleting' },
+  { id: 'allowUpdating', text: 'Updating' },
+  { id: 'allowResizing', text: 'Resizing' },
+  { id: 'allowDragging', text: 'Dragging' },
+];
 
-		this.schedulerRef = React.createRef();
+export default () => {
+  const [data, setData] = React.useState(appointments);
+  const [editingOptions, setEditingOptions] = React.useState({
+    allowAdding: true,
+    allowDeleting: true,
+    allowUpdating: true,
+    allowDragging: true,
+    allowResizing: true,
+  });
+  const [addedAppointment, setAddedAppointment] = React.useState({});
+  const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] = React.useState(false);
 
-		this.addAppointment = () => {
-			console.log(this.schedulerRef);
-			// this.schedulerRef.current.instance.addAppointment({
-			// 	text: "Website Re-Design Plan",
-			// 	startDate: new Date(),
-			// 	endDate: new Date(),
-			// });
-		};
+  const {
+    allowAdding, allowDeleting, allowUpdating, allowResizing, allowDragging,
+  } = editingOptions;
 
-		this.state = {
-			data: appointments,
-		};
-	}
+  const onCommitChanges = React.useCallback(({ added, changed, deleted }) => {
+    if (added) {
+      const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+      setData([...data, { id: startingAddedId, ...added }]);
+    }
+    if (changed) {
+      setData(data.map(appointment => (
+        changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment)));
+    }
+    if (deleted !== undefined) {
+      setData(data.filter(appointment => appointment.id !== deleted));
+    }
+    setIsAppointmentBeingCreated(false);
+  }, [setData, setIsAppointmentBeingCreated, data]);
+  const onAddedAppointmentChange = React.useCallback((appointment) => {
+    setAddedAppointment(appointment);
+    setIsAppointmentBeingCreated(true);
+  });
+  const handleEditingOptionsChange = React.useCallback(({ target }) => {
+    const { value } = target;
+    const { [value]: checked } = editingOptions;
+    setEditingOptions({
+      ...editingOptions,
+      [value]: !checked,
+    });
+  });
 
-	BlackOutAppointment = ({ children, style, ...restProps }) => (
-		<Appointments.Appointment
-			onClick={(xd) => console.log(xd)}
-			{...restProps}
-			style={{
-				...style,
-				backgroundColor: "gray",
-				borderRadius: "8px",
-			}}
-		>
-			{console.log(children)}
-		</Appointments.Appointment>
-	);
+  const TimeTableCell = React.useCallback(React.memo(({ onDoubleClick, ...restProps }) => (
+    <WeekView.TimeTableCell
+      {...restProps}
+      onDoubleClick={allowAdding ? onDoubleClick : undefined}
+    />
+  )), [allowAdding]);
 
-	style = (theme) => ({
-		todayCell: {
-			backgroundColor: fade(theme.palette.primary.main, 0.1),
-			"&:hover": {
-				backgroundColor: fade(theme.palette.primary.main, 0.14),
-			},
-			"&:focus": {
-				backgroundColor: fade(theme.palette.primary.main, 0.16),
-			},
-		},
-		weekendCell: {
-			backgroundColor: fade(
-				theme.palette.action.disabledBackground,
-				0.04
-			),
-			"&:hover": {
-				backgroundColor: fade(
-					theme.palette.action.disabledBackground,
-					0.04
-				),
-			},
-			"&:focus": {
-				backgroundColor: fade(
-					theme.palette.action.disabledBackground,
-					0.04
-				),
-			},
-		},
-		today: {
-			backgroundColor: fade(theme.palette.primary.main, 0.16),
-		},
-		weekend: {
-			backgroundColor: fade(
-				theme.palette.action.disabledBackground,
-				0.06
-			),
-		},
-	});
+  const CommandButton = React.useCallback(({ id, ...restProps }) => {
+    if (id === 'deleteButton') {
+      return <AppointmentForm.CommandButton id={id} {...restProps} disabled={!allowDeleting} />;
+    }
+    return <AppointmentForm.CommandButton id={id} {...restProps} />;
+  }, [allowDeleting]);
 
-	TimeTableCellBase = ({ classes, ...restProps }) => {
-		console.log(classes);
-		console.log(restProps);
-		const { startDate } = restProps;
-		const date = new Date(startDate);
-		return (
-			<WeekView.TimeTableCell
-				{...restProps}
-				onClick={this.clickTableCell}
-			/>
-		);
-	};
+  const allowDrag = React.useCallback(
+    () => allowDragging && allowUpdating,
+    [allowDragging, allowUpdating],
+  );
+  const allowResize = React.useCallback(
+    () => allowResizing && allowUpdating,
+    [allowResizing, allowUpdating],
+  );
 
-	TimeTableCell = withStyles(this.style, { name: "TimeTableCell" })(
-		this.TimeTableCellBase
-	);
+  const blackOutAppointment = ({ children, style, ...restProps }) => (
+	<Appointments.Appointment
+		onClick={(xd) => console.log(xd)}
+		{...restProps}
+		style={{
+			...style,
+			backgroundColor: "gray",
+			borderRadius: "8px",
+		}}
+	>
+		{console.log(children)}
+	</Appointments.Appointment>
+);
 
-	clickTableCell(props) {
-		console.log(props);
-		const newMeeting = {
-			title: "Example New",
-			startDate: props.startDate,
-			endDate: props.endDate,
-			id: 100,
-			location: "Room 1",
-		};
-		this.state.data.forEach((meeting) => {
-			meeting.allDay = true;
-			var date = meeting.endDate;
-			meeting.endDate = new Date(date.getTime() + 1 * 3600000);
-		});
-		this.setState((prevState) => ({
-			arrayvar: [...prevState.data, newMeeting],
-		}));
-		this.forceUpdate();
-	}
+  return (
+    <React.Fragment>
+      <Paper>
+        <Scheduler
+          data={data}
+          height={600}
+        >
+          <ViewState
+            currentDate={currentDate}
+          />
+          <EditingState
+            onCommitChanges={onCommitChanges}
 
-	render() {
-		const { data } = this.state;
+            addedAppointment={addedAppointment}
+            onAddedAppointmentChange={onAddedAppointmentChange}
+          />
 
-		return (
-			<React.Fragment>
-				<Paper>
-					<Scheduler data={this.state.data} height={"100%"}>
-						<ViewState />
-						<WeekView
-							startDayHour={9}
-							endDayHour={19}
-							timeTableCellComponent={this.TimeTableCell}
-						/>
-						<Appointments
-							ref={this.schedulerRef}
-							appointmentComponent={this.BlackOutAppointment}
-						/>
-					</Scheduler>
-				</Paper>
+          <IntegratedEditing />
+          <WeekView
+            startDayHour={9}
+            endDayHour={19}
+            timeTableCellComponent={TimeTableCell}
+          />
 
-				<button onClick={this.addAppointment}>Confirm Meeting</button>
-			</React.Fragment>
-		);
-	}
-}
+		  <Appointments 
+		  	appointmentComponent={blackOutAppointment}
+		  />
+
+          <AppointmentTooltip
+            showOpenButton
+            showDeleteButton={allowDeleting}
+          />
+          <AppointmentForm
+            commandButtonComponent={CommandButton}
+            readOnly={isAppointmentBeingCreated ? false : !allowUpdating}
+          />
+          <DragDropProvider
+            allowDrag={allowDrag}
+            allowResize={allowResize}
+          />
+        </Scheduler>
+      </Paper>
+    </React.Fragment>
+  );
+};
