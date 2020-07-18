@@ -3,20 +3,22 @@ import "../App.css";
 import { Grid, CssBaseline, FormControl, InputLabel, NativeSelect, TextField, Typography, Button } from "@material-ui/core";
 import InviteField from "./InviteField";
 import CalendarPicker from "./CalendarPicker";
+import { Redirect } from "react-router-dom";
 
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isShowCalendar: false,
+			isEventSelected: false,
+			redirect: false,
 			invitees: null,
 			title: "",
 			description: "",
 			duration: 30,
-			event: null,
-			isShowCalendar: false,
-			isEventSelected: false
+			event: null
 		};
-		this.addMeeting = this.addMeeting.bind(this);
+		this.createMeeting = this.createMeeting.bind(this);
 	}
 
 	showCalendar() {
@@ -31,24 +33,10 @@ class NewMeeting extends React.Component {
 		});
 	}
 
-	addMeeting(data) {
-		console.log("hello");
-		const newMeeting = {
-			...data,
-			title: this.state.title,
-			description: this.state.description,
-			link: "REPLACE THIS WITH ZOOM LINK",
-		};
-		console.log(newMeeting);
-		// Now save the new meeting
-		// TODO: Tait save meeting into JSON file
-		window.location = "/";
-	}
-
 	handleInviteeChange = (invitees) => {
 		this.setState({
 			invitees: invitees
-		});
+		})
 		this.hideCalendar();
 	}
 
@@ -76,9 +64,51 @@ class NewMeeting extends React.Component {
 		});
 	}
 
+	createMeeting() {
+		const members = this.state.invitees.map((invitee) => {
+			var getInitials = function (string) {
+				var names = string.split(' '),
+					initials = names[0].substring(0, 1).toUpperCase();
+				
+				if (names.length > 1) {
+					initials += names[names.length - 1].substring(0, 1).toUpperCase();
+				}
+				return initials;
+			};
+			return (
+				{
+					name: invitee,
+					initial: getInitials(invitee)
+				}
+			)
+		});
+		const newMeeting = {
+			title: this.state.title,
+			startDate: this.state.event.startDate,
+			endDate: this.state.event.endDate,
+			description: this.state.description,
+			link: "https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09", // TODO: Update Zoom Link
+			members: members
+		};
+		console.log(newMeeting);
+
+		const meetings = JSON.parse(localStorage.getItem("meetings"));
+		meetings.push(newMeeting);
+		localStorage.setItem("meetings", JSON.stringify(meetings));
+
+		this.setState({
+			redirect: true
+		});
+	}
+
 	render() {
+		if (this.state.redirect) {
+			return <Redirect to='/'></Redirect>
+		}
+
 		return (
 			<div>
+
 				<CssBaseline />
 
 				<Typography
@@ -147,6 +177,7 @@ class NewMeeting extends React.Component {
 									variant="contained"
 									color="primary"
 									size="large"
+									onClick={this.createMeeting}
 								>
 									Create Meeting
 								</Button>

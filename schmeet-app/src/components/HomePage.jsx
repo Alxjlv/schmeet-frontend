@@ -9,20 +9,26 @@ import {
 	Box
 } from "@material-ui/core";
 import MeetingCard from './MeetingCard';
-import { appointments } from "../demo-data/appointments";
 
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			meetings: appointments,
-		};
 	}
 
 	cardList(day) {
-		return this.state.meetings
-			.filter((meeting) => meeting.startDate.getDay() - 1 === day)
+		return JSON.parse(localStorage.getItem("meetings"))
+			.filter((meeting) => new Date(meeting.startDate).getUTCDay() === day)
+			.sort((a, b) => {
+				a = new Date(a.startDate);
+				b = new Date(b.startDate);
+				if (a.getTime() === b.getTime()) {
+					return 0
+				} else if (a.getTime() <= b.getTime()) {
+					return -1;
+				} else {
+					return 1;
+				}
+			})
 			.map((meeting) => {
 				return (
 					<MeetingCard meeting={meeting} day={day} style={{ margin: "20px" }} />
@@ -32,13 +38,13 @@ export default class HomePage extends Component {
 
 	intToDay = (day) => {
 		return [
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
-			"Sunday",
+			"Sunday 19th",
+			"Monday 20th",
+			"Tuesday 21st",
+			"Wednesday 22nd",
+			"Thursday 23rd",
+			"Friday 24th",
+			"Saturday 25th",
 		][day];
 	};
 
@@ -54,7 +60,7 @@ export default class HomePage extends Component {
 							paddingTop: 15,
 							minHeight: "100%",
 							background:
-								i === 1 &&
+								i === 0 &&
 								"linear-gradient(to right, #36d1dc, #5b86e5)",
 						}}
 					>
@@ -63,10 +69,10 @@ export default class HomePage extends Component {
 							variant="h4"
 							component="h2"
 							style={{
-								color: i === 1 && "white",
+								color: i === 0 && "white",
 							}}
 						>
-							{this.intToDay(i)} {13 + i + "th"}
+							{this.intToDay(i)}
 						</Typography>
 						<Divider />
 						{this.cardList(i)}
@@ -98,7 +104,7 @@ export default class HomePage extends Component {
 						Previous Week
 					</Button>
 					<Typography gutterBottom variant="h2" component="h2">
-						Schedule for 13th - 18th of July
+						Schedule for 19th - 25th of July
 					</Typography>
 					<Button
 						variant="contained"

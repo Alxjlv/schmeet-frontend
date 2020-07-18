@@ -40,7 +40,6 @@ class CalendarPicker extends React.Component {
     }
 
     addDurationToDate(start, durationMinutes) {
-        console.log(start);
         const year = start.getFullYear();
         const month = start.getMonth();
         const date = start.getDate();
@@ -141,11 +140,13 @@ class CalendarPicker extends React.Component {
                     } else {
                         className = "item event";
                     }
-                    console.log(this.props.duration);
-                    console.log(className);
+                    var selected = false;
+                    if (this.state.selected != undefined) {
+                        selected = this.state.selected.startDate.getTime() == event.startDate.getTime() && this.state.selected.endDate.getTime() == event.endDate.getTime();
+                    }
                     return (
                         <div className={className} style={{gridRowStart: this.getRowOffset(event.startDate), gridColumnStart: this.getColumnOffset(event.startDate)}}>
-                            <CalendarEventButton time={this.getDateString(event.startDate)} eventID={event} isSelected={this.state.selected === event} onSelect={this.handleEventSelection}/>
+                            <CalendarEventButton time={this.getDateString(event.startDate)} eventID={event} isSelected={selected} onSelect={this.handleEventSelection}/>
                         </div>
                     );
                 })}

@@ -6,6 +6,7 @@ import NewMeeting from "./components/NewMeeting";
 import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { appointments } from "./demo-data/appointments";
 
 function App() {
 	const [darkState, setDarkState] = useState(false);
@@ -21,6 +22,16 @@ function App() {
 	const handleThemeChange = () => {
 		setDarkState(!darkState);
 	};
+
+	if (typeof(Storage) !== "undefined") {
+		if (localStorage.getItem("meetings") == undefined) {
+			localStorage.setItem("meetings", JSON.stringify(appointments));
+			console.log("added data");
+		}
+	  } else {
+		alert("Yikes! Your browser doesn't support Web Storage. This won't work for you sorry");
+	  }
+
 	return (
 		<div className="App">
 			<MuiThemeProvider theme={darkTheme}>
