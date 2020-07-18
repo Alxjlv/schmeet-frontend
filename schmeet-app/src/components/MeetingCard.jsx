@@ -28,8 +28,9 @@ function MeetingCard(props) {
 	};
 
     const formatToHoursAndMinutes = (date) => {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
+		var d = new Date(date);
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
         var ampm = hours >= 12 ? "am" : "pm";
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'

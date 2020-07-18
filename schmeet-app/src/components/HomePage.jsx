@@ -9,24 +9,21 @@ import {
 	Box
 } from "@material-ui/core";
 import MeetingCard from './MeetingCard';
-import { appointments } from "../demo-data/appointments";
 
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			meetings: appointments,
-		};
 	}
 
 	cardList(day) {
-		return this.state.meetings
-			.filter((meeting) => meeting.startDate.getUTCDay() === day)
+		return JSON.parse(localStorage.getItem("meetings"))
+			.filter((meeting) => new Date(meeting.startDate).getUTCDay() === day)
 			.sort((a, b) => {
-				if (a.startDate.getTime() === b.startDate.getTime()) {
+				a = new Date(a.startDate);
+				b = new Date(b.startDate);
+				if (a.getTime() === b.getTime()) {
 					return 0
-				} else if (a.startDate.getTime() <= b.startDate.getTime()) {
+				} else if (a.getTime() <= b.getTime()) {
 					return -1;
 				} else {
 					return 1;
