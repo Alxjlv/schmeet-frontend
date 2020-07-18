@@ -10,17 +10,17 @@ export const appointments = [
 		members: [
 			{
 				name: "Tait Fuller",
-				initial: "TF"
+				initial: "TF",
 			},
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
-			}
-		]
+				initial: "SY",
+			},
+		],
 	},
 	{
 		title: "Break Time",
@@ -33,21 +33,21 @@ export const appointments = [
 		members: [
 			{
 				name: "Ben Piper",
-				initial: "BP"
+				initial: "BP",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
+				initial: "SY",
 			},
 			{
 				name: "Alex Verkerk",
-				initial: "AV"
+				initial: "AV",
 			},
 			{
 				name: "Oliver Chamberlain",
-				initial: "OC"
+				initial: "OC",
 			},
-		]
+		],
 	},
 	{
 		title: "Watch Hamilton",
@@ -60,29 +60,29 @@ export const appointments = [
 		members: [
 			{
 				name: "Tait Fuller",
-				initial: "TF"
+				initial: "TF",
 			},
 			{
 				name: "Ben Piper",
-				initial: "BP"
+				initial: "BP",
 			},
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
+				initial: "SY",
 			},
 			{
 				name: "Alex Verkerk",
-				initial: "AV"
+				initial: "AV",
 			},
 			{
 				name: "Oliver Chamberlain",
-				initial: "OC"
+				initial: "OC",
 			},
-		]
+		],
 	},
 	{
 		title: "Break Time",
@@ -95,21 +95,21 @@ export const appointments = [
 		members: [
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
+				initial: "SY",
 			},
 			{
 				name: "Alex Verkerk",
-				initial: "AV"
+				initial: "AV",
 			},
 			{
 				name: "Oliver Chamberlain",
-				initial: "OC"
+				initial: "OC",
 			},
-		]
+		],
 	},
 	{
 		title: "Break Time",
@@ -122,21 +122,21 @@ export const appointments = [
 		members: [
 			{
 				name: "Tait Fuller",
-				initial: "TF"
+				initial: "TF",
 			},
 			{
 				name: "Ben Piper",
-				initial: "BP"
+				initial: "BP",
 			},
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
-			}
-		]
+				initial: "SY",
+			},
+		],
 	},
 	{
 		title: "Break Time",
@@ -148,21 +148,21 @@ export const appointments = [
 		members: [
 			{
 				name: "Tait Fuller",
-				initial: "TF"
+				initial: "TF",
 			},
 			{
 				name: "Ben Piper",
-				initial: "BP"
+				initial: "BP",
 			},
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Oliver Chamberlain",
-				initial: "OC"
+				initial: "OC",
 			},
-		]
+		],
 	},
 	{
 		title: "Break Time",
@@ -174,38 +174,38 @@ export const appointments = [
 		members: [
 			{
 				name: "Tait Fuller",
-				initial: "TF"
+				initial: "TF",
 			},
 			{
 				name: "Seif Younes",
-				initial: "SY"
+				initial: "SY",
 			},
 			{
 				name: "Alex Verkerk",
-				initial: "AV"
+				initial: "AV",
 			},
 			{
 				name: "Oliver Chamberlain",
-				initial: "OC"
+				initial: "OC",
 			},
-		]
+		],
 	},
 	{
 		title: "Another Meeting with Leon",
-		startDate: new Date("2020-07-25T14:00"),
-		endDate: new Date("2020-07-25T15:00"),
+		startDate: new Date("2020-07-21T14:00"),
+		endDate: new Date("2020-07-21T15:00"),
 		description: "Probably the best time you'll ever have in your life",
 		link:
 			"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09",
 		members: [
 			{
 				name: "Aiden Burgess",
-				initial: "AB"
+				initial: "AB",
 			},
 			{
 				name: "Leon Chin",
-				initial: "LC"
-			}
-		]
+				initial: "LC",
+			},
+		],
 	},
 ];
