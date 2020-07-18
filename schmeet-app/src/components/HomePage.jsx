@@ -1,76 +1,19 @@
 import React, { Component } from "react";
 import "../App.css";
 import {
-	Card,
 	Button,
 	CssBaseline,
 	Typography,
-	CardContent,
-	CardActions,
 	Paper,
 	Divider,
-	Box,
-	Avatar,
-	Grid
+	Box
 } from "@material-ui/core";
-import {
-	AvatarGroup
-} from "@material-ui/lab";
+import MeetingCard from './MeetingCard';
 import { appointments } from "../demo-data/appointments";
 
 const joinButtonStyle = {
 	marginRight: '8px'
 }
-
-const MeetingCard = (props) => (
-	<Card style={{ maxWidth: 345, margin: 10 }}>
-		<CardContent>
-			<Typography gutterBottom variant="h6" component="h4">
-				{props.meeting.title}
-			</Typography>
-			<Typography
-				variant="body2"
-				color="textSecondary"
-				component="p"
-				align="left"
-				gutterBottom
-			>
-				{props.meeting.description}
-			</Typography>
-			<Typography variant="subtitle2" align="left">
-				{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
-				{formatToHoursAndMinutes(props.meeting.endDate)}
-			</Typography>
-		</CardContent>
-		<CardActions>
-			<Grid container direction="row" justify="space-between">
-				<Grid>
-					{props.day ===1 && <Button
-						variant="contained"
-						size="medium"
-						color="primary"
-						href={props.meeting.link}
-						target="blank"
-						style={joinButtonStyle}>
-						Join
-					</Button>}
-					<Button
-						variant="outlined"
-						size="medium"
-						color="primary">
-						Invite
-					</Button>
-				</Grid>
-				<AvatarGroup max={3}>
-					<Avatar alt="Tait Fuller">TF</Avatar>
-					<Avatar alt="Alex Verkerk">AV</Avatar>
-					<Avatar alt="Oliver Chamberlain">OC</Avatar>
-					<Avatar alt="Ben Piper">BP</Avatar>
-				</AvatarGroup>
-			</Grid>
-		</CardActions>
-	</Card>
-);
 
 const formatToHoursAndMinutes = (date) => {
 	var hours = date.getHours();
