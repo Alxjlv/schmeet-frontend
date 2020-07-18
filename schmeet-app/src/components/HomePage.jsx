@@ -10,17 +10,12 @@ import {
 	Typography,
 	CardContent,
 	CardActions,
-	CardMedia,
 	Paper,
 	Divider,
+	Box,
+	Grid,
 } from "@material-ui/core";
-import appointments from "../demo-data/today-appointments";
-
-const useStyles = makeStyles({
-	root: {
-		maxWidth: 345,
-	},
-});
+import { appointments } from "../demo-data/appointments";
 
 const MeetingCard = (props) => (
 	<Card style={{ maxWidth: 345, margin: 10 }}>
@@ -39,7 +34,8 @@ const MeetingCard = (props) => (
 					{props.meeting.description}
 				</Typography>
 				<Typography variant="subtitle2" align="left">
-					4PM - 4:30PM
+					{formatToHoursAndMinutes(props.meeting.startDate)} -{" "}
+					{formatToHoursAndMinutes(props.meeting.endDate)}
 				</Typography>
 			</CardContent>
 		</CardActionArea>
@@ -47,14 +43,38 @@ const MeetingCard = (props) => (
 			<Button size="medium" color="primary">
 				Share
 			</Button>
-			<Button size="medium" color="primary">
+			<Button size="medium" color="primary" href={props.meeting.link}>
 				Join
 			</Button>
 		</CardActions>
 	</Card>
 );
 
-export default class ExercisesList extends Component {
+const formatToHoursAndMinutes = (date) => {
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var ampm = hours >= 12 ? "pm" : "am";
+	hours = hours % 12;
+	hours = hours ? hours : 12; // the hour '0' should be '12'
+	minutes = minutes < 10 ? "0" + minutes : minutes;
+	var strTime = hours + ":" + minutes + ampm;
+	return strTime;
+};
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	paper: {
+		height: 140,
+		width: 100,
+	},
+	control: {
+		padding: theme.spacing(2),
+	},
+}));
+
+export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -96,10 +116,20 @@ export default class ExercisesList extends Component {
 							margin: "5px",
 							paddingTop: 15,
 							minHeight: "100%",
+							background:
+								i == 1 &&
+								"linear-gradient(to right, #36d1dc, #5b86e5)",
 						}}
 					>
-						<Typography gutterBottom variant="h4" component="h2">
-							{this.intToDay(i)}
+						<Typography
+							gutterBottom
+							variant="h4"
+							component="h2"
+							style={{
+								color: i == 1 && "white",
+							}}
+						>
+							{this.intToDay(i)} {13 + i + "th"}
 						</Typography>
 						<Divider />
 						{this.cardList(i)}
@@ -110,6 +140,38 @@ export default class ExercisesList extends Component {
 
 		return (
 			<div>
+				<Box
+					mx="auto"
+					bgcolor="background.paper"
+					p={1}
+					style={{ display: "flex", justifyContent: "space-between" }}
+				>
+					<Button
+						variant="contained"
+						color="primary"
+						style={{
+							float: "right",
+							marginRight: "20px",
+							height: 50,
+						}}
+					>
+						Next Week
+					</Button>
+					<Typography gutterBottom variant="h2" component="h2">
+						Schedule for 13th - 18th of July
+					</Typography>
+					<Button
+						variant="contained"
+						color="primary"
+						style={{
+							float: "right",
+							marginRight: "20px",
+							height: 50,
+						}}
+					>
+						Previous Week
+					</Button>
+				</Box>
 				<CssBaseline />
 				<div style={{ display: "flex" }}>{columns}</div>
 			</div>
