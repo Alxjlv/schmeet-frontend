@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 import { TextField, Chip } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
-import { makeStyles } from "@material-ui/core/styles";
 
 class InviteField extends React.Component {
   state = {
@@ -31,6 +30,8 @@ class InviteField extends React.Component {
     }
   };
 
+  handleDelete = (evt) => {};
+
   render() {
     const len = this.state.emails.length;
     return (
@@ -50,7 +51,7 @@ class InviteField extends React.Component {
             className="Chip"
             key={email}
             label={email}
-            deleteIcon={<ClearIcon />}
+            onDelete={this.handleDelete}
             color="primary"
           ></Chip>
         ))}
