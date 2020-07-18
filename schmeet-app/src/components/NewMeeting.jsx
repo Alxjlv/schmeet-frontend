@@ -10,6 +10,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { sizing } from "@material-ui/system";
 import BaseCalendar from "./baseCalendar.js"
+import InviteField from "./InviteField.jsx";
 
 const useStyles = makeStyles({
 	root: {
@@ -38,6 +39,9 @@ function NewMeeting() {
 			</Typography>
 
 			<Grid container spacing={3} className={classes.root}>
+				<Grid item xs={12}>
+					<InviteField/>
+				</Grid>
 				<Grid item xs={12}>
 					<TextField
 						id="title"
