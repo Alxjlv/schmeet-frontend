@@ -10,3 +10,11 @@
 .NavBarItem {
 	height: 40px;
 }
+
+.Chip {
+	margin: 5px;
+}
+
+.TextInput {
+	width: 500px;
+}
