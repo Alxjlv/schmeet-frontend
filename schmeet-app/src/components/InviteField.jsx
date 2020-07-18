@@ -32,25 +32,28 @@ class InviteField extends React.Component {
   };
 
   render() {
+    const len = this.state.emails.length;
     return (
-      <div className="InviteFieldContainer">
-        {this.state.emails.map((email) => (
-          <Chip
-            className="InviteFieldItem"
-            key={email}
-            label={email}
-            deleteIcon={<ClearIcon />}
-          ></Chip>
-        ))}
-
+      <div>
         <TextField
-          className="InviteFieldItem TextInput"
+          className="TextInput"
           label="Invitees"
           value={this.state.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
           autofocus={true}
+          style={{ marginBottom: len === 0 ? "42px" : "0px" }}
         />
+        <br />
+        {this.state.emails.map((email) => (
+          <Chip
+            className="Chip"
+            key={email}
+            label={email}
+            deleteIcon={<ClearIcon />}
+            color="primary"
+          ></Chip>
+        ))}
       </div>
     );
   }

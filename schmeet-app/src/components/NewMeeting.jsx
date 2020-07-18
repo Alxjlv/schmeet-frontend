@@ -38,10 +38,9 @@ function NewMeeting() {
 				New Meeting
 			</Typography>
 
+			<InviteField />
+
 			<Grid container spacing={3} className="TextInput">
-				<Grid item xs={12}>
-					<InviteField/>
-				</Grid>
 				<Grid item xs={12}>
 					<TextField
 						id="title"
