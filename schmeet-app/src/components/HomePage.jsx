@@ -43,7 +43,7 @@ const MeetingCard = (props) => (
 			<Button size="medium" color="primary">
 				Share
 			</Button>
-			<Button size="medium" color="primary" href={props.meeting.link}>
+			<Button size="medium" color="primary" href={props.meeting.link} target="blank">
 				Join
 			</Button>
 		</CardActions>
