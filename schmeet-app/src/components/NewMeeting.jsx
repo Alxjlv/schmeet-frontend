@@ -23,12 +23,7 @@ function NewMeeting() {
 
 			<Grid container spacing={3} className="TextInput">
 				<Grid item xs={12}>
-					<TextField
-						id="title"
-						label="Title"
-						className="TextInput"
-						autoFocus="true"
-					/>
+					<TextField id="title" label="Title" className="TextInput" />
 				</Grid>
 				<Grid item xs={12}>
 					<TextField

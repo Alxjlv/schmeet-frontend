@@ -9,7 +9,7 @@ import NotificationBadge from "./NotificationBadge";
 function NavBar() {
 	return (
 		<div className="NavBar">
-			<AppBar className="TopNavbar" position="static" color="white">
+			<AppBar className="TopNavbar" position="static" color="transparent">
 				<Toolbar>
 					<Grid container justify="space-between">
 						<Grid item xs={6} component={Link} to="/">
