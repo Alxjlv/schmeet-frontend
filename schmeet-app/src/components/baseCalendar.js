@@ -122,7 +122,6 @@ export default () => {
             addedAppointment={addedAppointment}
             onAddedAppointmentChange={onAddedAppointmentChange}
           />
-
           <IntegratedEditing />
           <WeekView
             startDayHour={9}
