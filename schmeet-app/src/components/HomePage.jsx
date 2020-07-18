@@ -12,6 +12,7 @@ import {
 	CardActions,
 	CardMedia,
 	Paper,
+	Divider,
 } from "@material-ui/core";
 import appointments from "../demo-data/today-appointments";
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 const MeetingCard = (props) => (
-	<Card style={{ maxWidth: 345 }}>
+	<Card style={{ maxWidth: 345, margin: 10 }}>
 		<CardActionArea>
 			<CardContent>
 				<Typography gutterBottom variant="h6" component="h4">
@@ -62,35 +63,46 @@ export default class ExercisesList extends Component {
 		};
 	}
 
-	cardList() {
-		return this.state.meetings.map((meeting) => {
-			return <MeetingCard meeting={meeting} style={{ margin: "20px" }} />;
-		});
+	cardList(day) {
+		return this.state.meetings
+			.filter((meeting) => meeting.startDate.getDay() - 1 == day)
+			.map((meeting) => {
+				return (
+					<MeetingCard meeting={meeting} style={{ margin: "20px" }} />
+				);
+			});
 	}
 
 	intToDay = (day) => {
 		return [
-			"Sunday",
 			"Monday",
 			"Tuesday",
 			"Wednesday",
 			"Thursday",
 			"Friday",
 			"Saturday",
+			"Sunday",
 		][day];
 	};
 
 	render() {
-		const numColumns = 7;
+		const numColumns = 5;
 		const columns = [];
 		for (let i = 0; i < numColumns; i++) {
 			columns.push(
-				<div>
-					<Paper>
-						<Typography gutterBottom variant="h5" component="h2">
+				<div style={{ flexGrow: 1, flexBasis: 1 }}>
+					<Paper
+						style={{
+							margin: "5px",
+							paddingTop: 15,
+							minHeight: "100%",
+						}}
+					>
+						<Typography gutterBottom variant="h4" component="h2">
 							{this.intToDay(i)}
 						</Typography>
-						{this.cardList()}
+						<Divider />
+						{this.cardList(i)}
 					</Paper>
 				</div>
 			);

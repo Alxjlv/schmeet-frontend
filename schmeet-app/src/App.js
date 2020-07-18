@@ -12,8 +12,7 @@ function App() {
 			<NavBar />
 			<Switch>
 				<Route exact path="/NewMeeting" component={NewMeeting}></Route>
-				<Route exact path="/Home" component={HomePage}></Route>
-				<Route exact path="/" component={BaseCalendar}></Route>
+				<Route exact path="/" component={HomePage}></Route>
 			</Switch>
 		</div>
 	);
