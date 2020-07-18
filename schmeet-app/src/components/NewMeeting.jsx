@@ -1,6 +1,12 @@
 import React from "react";
 import "../App.css";
-import { Grid, CssBaseline, TextField, Typography, Button } from "@material-ui/core";
+import {
+	Grid,
+	CssBaseline,
+	TextField,
+	Typography,
+	Button,
+} from "@material-ui/core";
 import BaseCalendar from "./BaseCalendar";
 import InviteField from "./InviteField";
 // import { ReactComponent } from "*.svg";
@@ -8,14 +14,21 @@ import InviteField from "./InviteField";
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {isShowCalendar: false};
+		this.state = { isShowCalendar: false };
 	}
 
 	showCalendar() {
 		this.setState({
-			isShowCalendar: true
-		})
-	};
+			isShowCalendar: true,
+		});
+	}
+
+	addMeeting(data) {
+		console.log("hello");
+		console.log(data);
+		const newMeeting = {};
+		window.location = "/";
+	}
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
@@ -59,15 +72,24 @@ class NewMeeting extends React.Component {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						{isShowCalendar
-							? <BaseCalendar />
-							: <Button variant="contained" color="primary" size="large" onClick={() => {this.showCalendar()}}>Find Times</Button>
-						}
+						{isShowCalendar ? (
+							<BaseCalendar onAddMeeting={this.addMeeting} />
+						) : (
+							<Button
+								variant="contained"
+								color="primary"
+								size="large"
+								onClick={() => {
+									this.showCalendar();
+								}}
+							>
+								Find Times
+							</Button>
+						)}
 					</Grid>
-
 				</Grid>
 			</div>
-		)
+		);
 	}
 }
 

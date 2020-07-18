@@ -16,7 +16,7 @@ import {
 import { appointments } from "../demo-data/appointments";
 
 const currentDate = "2020-07-13";
-const BaseCalendar = () => {
+const BaseCalendar = (props) => {
 	const [data, setData] = React.useState(appointments);
 	const [addedAppointment, setAddedAppointment] = React.useState({});
 	const [
@@ -24,31 +24,10 @@ const BaseCalendar = () => {
 		setIsAppointmentBeingCreated,
 	] = React.useState(false);
 
-	const onCommitChanges = React.useCallback(
-		({ added, changed, deleted }) => {
-			if (added) {
-				const startingAddedId =
-					data.length > 0 ? data[data.length - 1].id + 1 : 0;
-				setData([...data, { id: startingAddedId, ...added }]);
-			}
-			if (changed) {
-				setData(
-					data.map((appointment) =>
-						changed[appointment.id]
-							? { ...appointment, ...changed[appointment.id] }
-							: appointment
-					)
-				);
-			}
-			if (deleted !== undefined) {
-				setData(
-					data.filter((appointment) => appointment.id !== deleted)
-				);
-			}
-			setIsAppointmentBeingCreated(false);
-		},
-		[setData, setIsAppointmentBeingCreated, data]
-	);
+	const onCommitChanges = (added, changed, deleted) => {
+		props.onAddMeeting(added);
+	};
+
 	const onAddedAppointmentChange = React.useCallback((appointment) => {
 		appointment.title = "from field";
 		setAddedAppointment(appointment);
