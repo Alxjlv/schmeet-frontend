@@ -4,6 +4,7 @@ import { AppBar, Avatar, Button, Grid, Toolbar } from "@material-ui/core";
 import logoLight from "../images/schmeet-light.png";
 import logoDark from "../images/schmeet-dark.png";
 import { Link } from "react-router-dom";
+import NotificationBadge from "./NotificationBadge";
 
 function NavBar() {
 	return (
@@ -36,16 +37,12 @@ function NavBar() {
 							>
 								New Meeting
 							</Button>
-							<Button
-								className="NavBarItem"
-								variant="contained"
-								color="primary"
-								style={{ float: "right", marginRight: "20px" }}
-								component={Link}
-								to="/"
-							>
-								Connect Calendar
-							</Button>
+							<div style={{ float: "right", marginRight: 30 }}>
+								<NotificationBadge
+									className="NavBarItem"
+									style={{ left: "30px", float: "right" }}
+								/>
+							</div>
 						</Grid>
 					</Grid>
 				</Toolbar>
