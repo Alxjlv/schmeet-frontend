@@ -8,7 +8,8 @@ import InviteField from "./InviteField";
 class NewMeeting extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {isShowCalendar: false};
+		this.state = { isShowCalendar: false, title: "", description: "" };
+		this.addMeeting = this.addMeeting.bind(this);
 	}
 
 	state = {
@@ -17,9 +18,23 @@ class NewMeeting extends React.Component {
 
 	showCalendar() {
 		this.setState({
-			isShowCalendar: true
-		})
-	};
+			isShowCalendar: true,
+		});
+	}
+
+	addMeeting(data) {
+		console.log("hello");
+		const newMeeting = {
+			...data,
+			title: this.state.title,
+			description: this.state.description,
+			link: "REPLACE THIS WITH ZOOM LINK",
+		};
+		console.log(newMeeting);
+		// Now save the new meeting
+		// TODO: Tait save meeting into JSON file
+		window.location = "/";
+	}
 
 	handleTitleChange = (evt) => {
 		this.setState({
@@ -61,6 +76,9 @@ class NewMeeting extends React.Component {
 							id="description"
 							label="Description"
 							className="TextInput"
+							inputRef={(c) => {
+								this.state.description = c?.value || "";
+							}}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -82,15 +100,24 @@ class NewMeeting extends React.Component {
 					</FormControl>
 					</Grid>
 					<Grid item xs={12}>
-						{isShowCalendar
-							? <BaseCalendar meetingTitle={this.state.meetingTitle}/>
-							: <Button variant="contained" color="primary" size="large" onClick={() => {this.showCalendar()}}>Find Times</Button>
-						}
+						{isShowCalendar ? (
+							<BaseCalendar onAddMeeting={this.addMeeting} />
+						) : (
+							<Button
+								variant="contained"
+								color="primary"
+								size="large"
+								onClick={() => {
+									this.showCalendar();
+								}}
+							>
+								Find Times
+							</Button>
+						)}
 					</Grid>
-
 				</Grid>
 			</div>
-		)
+		);
 	}
 }
 
