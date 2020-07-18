@@ -42,7 +42,7 @@ class InviteField extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
-          autofocus={true}
+          autoFocus
           style={{ marginBottom: len === 0 ? "42px" : "0px" }}
         />
         <br />
