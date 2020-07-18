@@ -18,7 +18,13 @@ class NewMeeting extends React.Component {
 
 	showCalendar() {
 		this.setState({
-			isShowCalendar: true,
+			isShowCalendar: true
+		});
+	}
+
+	hideCalendar() {
+		this.setState({
+			isShowCalendar: false
 		});
 	}
 
@@ -36,12 +42,18 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
+<<<<<<< HEAD
+	handleNewInvitee = () => {
+		this.hideCalendar();
+	}
+=======
 	handleTitleChange = (evt) => {
 		this.setState({
 		  meetingTitle: evt.target.value
 		});
 		console.log(this.state.meetingTitle)
 	  };
+>>>>>>> master
 
 	render() {
 		const isShowCalendar = this.state.isShowCalendar;
@@ -60,7 +72,7 @@ class NewMeeting extends React.Component {
 					New Meeting
 				</Typography>
 
-				<InviteField />
+				<InviteField onNewInvitee={this.handleNewInvitee}/>
 
 				<Grid container spacing={3} className="TextInput">
 					<Grid item xs={12}>
@@ -102,7 +114,16 @@ class NewMeeting extends React.Component {
 					</Grid>
 					<Grid item xs={12}>
 						{isShowCalendar ? (
-							<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
+							<>
+								<BaseCalendar onAddMeeting={this.addMeeting} meetingTitle={this.state.meetingTitle} />
+								<Button
+									variant="contained"
+									color="primary"
+									size="large"
+								>
+									Create Meeting
+								</Button>
+							</>
 						) : (
 							<Button
 								variant="contained"
