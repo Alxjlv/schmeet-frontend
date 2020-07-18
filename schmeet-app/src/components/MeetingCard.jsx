@@ -13,7 +13,11 @@ import {
 } from "@material-ui/lab";
 
 function MeetingCard(props) {
-    // const members = 
+    const members = props.meeting.members.map((member) => {
+        return (
+            <Avatar alt={member.name}>{member.initial}</Avatar>
+        );
+    })
 
     const joinButtonStyle = {
         marginRight: '8px'
@@ -70,10 +74,7 @@ function MeetingCard(props) {
                         </Button>
                     </Grid>
                     <AvatarGroup max={3}>
-                        <Avatar alt="Tait Fuller">TF</Avatar>
-                        <Avatar alt="Alex Verkerk">AV</Avatar>
-                        <Avatar alt="Oliver Chamberlain">OC</Avatar>
-                        <Avatar alt="Ben Piper">BP</Avatar>
+                        {members}
                     </AvatarGroup>
                 </Grid>
             </CardActions>
