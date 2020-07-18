@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import { AppBar, Avatar, Button, Grid, Toolbar } from "@material-ui/core";
+import {
+	AppBar,
+	Avatar,
+	Button,
+	Grid,
+	Toolbar,
+	IconButton,
+} from "@material-ui/core";
 import logoLight from "../images/schmeet-light.png";
 import logoDark from "../images/schmeet-dark.png";
 import { Link } from "react-router-dom";
 import NotificationBadge from "./NotificationBadge";
 import profImage from "../images/account4.png";
+import {
+	AccountCircleOutlined as AccountsIcon,
+	DashboardOutlined as TileViewIcon,
+	Brightness4Outlined as ToggleDarkModeIcon,
+	Brightness5Outlined as ToggleLightModeIcon,
+	SearchOutlined as SearchIcon,
+	Menu as MenuIcon,
+	ViewAgendaOutlined as ListIcon,
+} from "@material-ui/icons";
 
 function NavBar({ theme, toggleDarkMode }) {
 	useEffect(() => {});
@@ -40,9 +56,19 @@ function NavBar({ theme, toggleDarkMode }) {
 							>
 								New Meeting
 							</Button>
-							<Button onClick={toggleDarkMode}>
-								Switch Theme
-							</Button>
+							<div style={{ float: "right", marginRight: 30 }}>
+								<IconButton
+									aria-label="toggle dark theme"
+									size="medium"
+									onClick={toggleDarkMode}
+								>
+									{theme ? (
+										<ToggleLightModeIcon />
+									) : (
+										<ToggleDarkModeIcon />
+									)}
+								</IconButton>
+							</div>
 							<div style={{ float: "right", marginRight: 30 }}>
 								<NotificationBadge
 									className="NavBarItem"
