@@ -45,11 +45,10 @@ class NewMeeting extends React.Component {
 		window.location = "/";
 	}
 
-	handleNewInvitee = (invitees) => {
+	handleInviteeChange = (invitees) => {
 		this.setState({
 			invitees: invitees
 		});
-		console.log(this.state.invitees);
 		this.hideCalendar();
 	}
 
@@ -92,7 +91,7 @@ class NewMeeting extends React.Component {
 					New Meeting
 				</Typography>
 
-				<InviteField onNewInvitee={this.handleNewInvitee}/>
+				<InviteField onChange={this.handleInviteeChange}/>
 
 				<Grid container spacing={3} className="TextInput">
 					<Grid item xs={12}>
