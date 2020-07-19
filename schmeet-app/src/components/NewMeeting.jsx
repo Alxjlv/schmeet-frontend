@@ -98,7 +98,7 @@ class NewMeeting extends React.Component {
 			endDate: this.state.event.endDate,
 			description: this.state.description,
 			link:
-				"https://zoom.us/j/91218086919?pwd=SGpjMFhGMGhIMTV4QzYxVy9aelZzZz09", // TODO: Update Zoom Link
+				"https://auckland.zoom.us/j/96499604165", // TODO: Update Zoom Link
 			members: members,
 		};
 		console.log(newMeeting);
